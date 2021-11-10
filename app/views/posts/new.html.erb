@@ -1,1 +1,32 @@
-<h1>新規投稿フォーム</h1>
+<h2 class="mt-3">新規投稿</h2>
+<%= form_with model: @post, local:true do |f| %>
+  <div class="form-group">
+    <label>どんな気持ち？</label><br/>
+    <%= f.text_field :title, class: "form-control post_title", placeholder:"" %>
+  </div>
+
+  <div class="form-group">
+    <label></label><br/>
+    <%= f.text_field :song, class: "form-control post_song", placeholder:"曲名" %>
+  </div>
+
+  <div class="form-group">
+    <label></label><br/>
+    <%= f.text_field :artist, class: "form-control post_artist", placeholder:"アーティスト" %>
+  </div>
+
+  <div class="form-group">
+    <label></label><br/>
+    <%= f.text_area :body, class: "form-control post_body", placeholder:"久しぶりに会う友人との待ち合わせ場所まで" %>
+  </div>
+
+  <div class="form-group">
+    <label></label><br/>
+    <%= f.attachment_field :post_image, class: "w-100" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'シェアする' %>
+  </div>
+
+<% end %>

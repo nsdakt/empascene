@@ -1,5 +1,6 @@
 class PostCommentsController < ApplicationController
   def create
+  
   end
 
   def destroy

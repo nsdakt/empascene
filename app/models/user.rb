@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # フォローされている人取得
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :following
-  
+
   # ユーザーをフォローする
   def follow(other_user)
     unless self == other_user
