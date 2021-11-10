@@ -10,22 +10,70 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-    　<li>
-        <%= link_to '投稿する', new_post_image_path %>
-      </li>
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-      <li>
-        <%= link_to "新規登録", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <span>
+          <% if user_signed_in? %>
+           <%= link_to 'empascene', posts_path, class: "navbar-brand" %>
+          <% else %>
+           <%= link_to 'empascene', root_path, class: "navbar-brand" %>
+          <% end %>
+          </span>
 
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse collapse show" id="navbarNavDropdown" style>
+            <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <li>
+    　          <%= link_to 'ホーム', posts_path %>
+              </li>
+              <li>
+    　          <%= link_to 'マイページ', user_path(current_user.id) %>
+              </li>
+            　<li>
+     　           <%= link_to '投稿する ', new_post_path %>
+              </li>
+              <li>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              </li>
+            <% else %>
+              <li>
+            　   <%= link_to 'Home', root_path %>
+              </li>
+              <li>
+            　   <%= link_to 'About', home_about_path %>
+              </li>
+              <li>
+                <%= link_to "新規登録", new_user_registration_path %>
+              </li>
+              <li>
+                <%= link_to "ログイン", new_user_session_path %>
+              </li>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+      <% unless controller.controller_name == 'homes' && controller.action_name == 'top' %>
+       <div class="center">
+
+         </div>
+      <% end %>
+    </header>
     <%= yield %>
+
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight A-kit.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
   </body>
 </html>
