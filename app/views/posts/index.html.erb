@@ -1,4 +1,39 @@
-<h2>ログイン後トップページ</h2>
-<h3>投稿一覧</h3>
-
 <%= flash[:notice] %>
+<%= flash[:success] %>
+<div class="container px-5 px-sm-0">
+  <h2>ログイン後トップページ</h2>
+  <h3>投稿一覧</h3>
+  <div class="row">
+    <div class="col-md-3">
+　　 <p>プロフィール表示</p>
+　   <%= link_to '投稿する ', new_post_path %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <!--<div class="d-flex justify-content-center">-->
+          <% @posts.each do |post| %>
+            <table class="table table-hover table-inverse ">
+              <tbody>
+                  <tr>
+                    <td>
+                      <%= link_to user_path(post.user.id) do %>
+                       <p>プロフィール画像 投稿者名</p>
+                      <% end %>
+                       <%= link_to post.title, post_path(post.id) %><br>
+                       <%= post.song %><br>
+                       <%= post.artist %><br>
+                      <%= link_to post_path(post.id) do %>
+                       <%= post.body.truncate(24) %><br>
+                       <%= attachment_image_tag(post, :post_image, :fill, 150, 150) %>
+                      <% end %>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      <!--</div>-->
+    </div>
+  </div>
+</div>

@@ -1,1 +1,43 @@
-<h1>投稿編集</h1>
+<div class="container">
+  <div ckass="row">
+   <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+
+    <h1>投稿編集</h1>
+    <% if @post.errors.any? %>
+    <%= @post.errors.count %>errors prohibited this post from being saved:
+     <ul>
+      <% @post.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+       <% end %>
+     </ul>
+    <% end %>
+    <%= form_with model:@post, url: post_path, local:true do |f| %>
+
+     <div class="form-group">
+      <label for="post_title">Title</label><br/>
+      <%= f.text_field :title, class: "form-control post_title" %>
+     </div>
+
+     <div class="form-group">
+      <label for="post_song">Title</label><br/>
+      <%= f.text_field :song, class: "form-control post_song" %>
+     </div>
+
+     <div class="form-group">
+      <label for="post_artist">Title</label><br/>
+      <%= f.text_field :artist, class: "form-control post_artist" %>
+     </div>
+
+     <div class="form-group">
+      <label for="post_body">Opinion</label><br/>
+      <%= f.text_area :body, class: "form-control book_body" %>
+     </div>
+
+     <div class="form-group">
+      <%= f.submit '更新する', class: "btn btn-outline-success" %>
+     </div>
+    <% end %>
+    <%= link_to "戻る", post_path(@post.id) %> | <%= link_to "ホームへ", posts_path %>
+   </div>
+  </div>
+</div>
