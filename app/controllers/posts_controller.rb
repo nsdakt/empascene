@@ -26,12 +26,29 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    if @post.user == current_user
+      render "edit"
+    else
+      redirect_to books_path
+    end
   end
 
   def update
+    @post = Post.find(params[:id])
+    @post.user_id = current_user.id
+    if @post.update(post_params)
+     flash[:notice] = "編集しました！"
+     redirect_to post_path(@post.id)
+    else
+     render :edit
+    end
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to posts_path
   end
 
   private
