@@ -5,7 +5,7 @@
   <h3>投稿一覧</h3>
   <div class="row">
     <div class="col-md-3">
-　　 <p>プロフィール表示</p>
+　　 <%= render 'users/user_info', user: @user %>
 　   <%= link_to '投稿する ', new_post_path %>
     </div>
   </div>
@@ -23,10 +23,20 @@
                        <%= link_to post.title, post_path(post.id) %><br>
                        <%= post.song %><br>
                        <%= post.artist %><br>
-                      <%= link_to post_path(post.id) do %>
-                       <%= post.body.truncate(24) %><br>
-                       <%= attachment_image_tag(post, :post_image, :fill, 150, 150) %>
-                      <% end %>
+                       <%= link_to post.body.truncate(24), post_path(post.id) %><br>
+                       <%= attachment_image_tag(post, :post_image, :fill, 150, 150) %><br >
+
+                         <% if post.favorited_by?(current_user) %>
+                          <%= link_to post_favorites_path(post), method: :delete do %>
+                            ♥<%= post.favorites.count %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to post_favorites_path(post), method: :post do %>
+                            ♡<%= post.favorites.count %>
+                          <% end %>
+                        <% end %>
+
+                       <i class="far fa-comments">:<%= post.post_comments.count %></i>
                     </td>
                   </tr>
               </tbody>
