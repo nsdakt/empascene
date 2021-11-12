@@ -9,33 +9,22 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   attachment :profile_image
 
-  # フォローしている人取得
+  # 自分がフォローしている側の関係性（与フォロー）
   has_many :active_relationships, class_name: "Relationship", foreign_key: "following_id", dependent: :destroy
-  has_many :followings, through: :active_relationships, source: :follower
-
-  # フォローされている人取得
+  # 自分がフォローされている側の関係性（被フォロー）
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+
+  # フォローしている人の取得
+  has_many :followings, through: :active_relationships, source: :follower
+  # フォローされている人の取得
   has_many :followers, through: :passive_relationships, source: :following
 
   # バリデーション
   validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
-  # ユーザーをフォローする
-  def follow(other_user)
-    unless self == other_user
-      self.relationships.find_or_create_by(folowing_id: other_user.id)
-    end
-  end
-
-  # ユーザーのフォローを外す
-  def unfollow(other_user)
-    relationship = self.relationships.find_or_create_by(folowing_id: other_user.id)
-    relationship.destroy if relationship
-  end
-
   # フォローしているかの確認
-  def following?(other_user)
-    self.followings.include?(other_user)
+  def followed_by?(user)
+    passive_relationships.find_by(following_id: user.id).present?
   end
 end

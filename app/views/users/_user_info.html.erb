@@ -14,18 +14,23 @@
     </tr>
     <tr>
       <th>
-        0フォロー ｜ 0フォロワー
+        <%= link_to user_followings_path(user.id) do %>
+          <%= user.followings.count %>フォロー
+        <% end %>
+        |<%= link_to user_followers_path(user.id) do %>
+          <%=  user.followers.count %>フォロワー
+        <% end %>
       </th>
     </tr>
     <tr>
       <% unless current_user == user %>
         <% if user.followed_by?(current_user) %>
           <th>
-           <%= link_to "フォローを外す", user_relationships_path(user.id), method: :DELETE, class: "btn btn-sm btn-outline-info" %>
+           <%= link_to "フォロー中", user_relationships_path(user.id), method: :DELETE, class: "btn btn-sm btn-info" %>
           </th>
         <% else %>
           <th>
-           <%= link_to "フォローする", user_relationships_path(user.id), method: :POST, class: "btn btn-sm btn-outline-success" %>
+           <%= link_to "フォローする", user_relationships_path(user.id), method: :POST, class: "btn btn-sm btn-outline-info" %>
           </th>
         <% end %>
       <% end %>
