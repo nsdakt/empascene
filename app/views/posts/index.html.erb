@@ -1,15 +1,15 @@
 <%= flash[:notice] %>
 <%= flash[:success] %>
-<div class="container px-5 px-sm-0">
   <h2>ログイン後トップページ</h2>
   <h3>投稿一覧</h3>
+<div class="container px-5 px-sm-0">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
 　　 <%= render 'users/user_info', user: @user %>
 　   <%= link_to '投稿する ', new_post_path %>
+　   <%= render 'searches/search_form' %>
     </div>
-  </div>
-  <div class="row">
+
     <div class="col-md-8">
       <!--<div class="d-flex justify-content-center">-->
           <% @posts.each do |post| %>
@@ -18,14 +18,14 @@
                   <tr>
                     <td>
                       <%= link_to user_path(post.user.id) do %>
-                       <p>プロフィール画像 投稿者名</p>
+                       <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
+                       <%= post.user.name %><br >
                       <% end %>
                        <%= link_to post.title, post_path(post.id) %><br>
                        <%= post.song %><br>
                        <%= post.artist %><br>
                        <%= link_to post.body.truncate(24), post_path(post.id) %><br>
                        <%= attachment_image_tag(post, :post_image, :fill, 150, 150) %><br >
-
                          <% if post.favorited_by?(current_user) %>
                           <%= link_to post_favorites_path(post), method: :delete do %>
                             ♥<%= post.favorites.count %>

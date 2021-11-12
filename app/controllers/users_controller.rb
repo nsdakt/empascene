@@ -15,7 +15,7 @@ class UsersController < ApplicationController
        flash[:success] = "変更を保存しました！"
        redirect_to user_path(current_user.id)
      else
-       flash[:warning] = "※そのアカウント名は使用できません"
+       flash[:warning] = "※使用できないアカウント名です"
        render :edit
      end
   end
