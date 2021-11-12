@@ -8,29 +8,25 @@
   <p>キャプション：<%= @post.body %></p>
   <%= attachment_image_tag @post, :post_image, :fill, 400, 300 %>
   <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @user == current_user %>
-    <%= link_to "編集",  edit_post_path(@post) %>
-    <%= link_to "削除",  post_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
   <% if @post.favorited_by?(current_user) %>
-    <p>
       <%= link_to post_favorites_path(@post), method: :delete do %>
         ♥<%= @post.favorites.count %>
       <% end %>
-    </p>
     <% else %>
-    <p>
       <%= link_to post_favorites_path(@post), method: :post do %>
         ♡<%= @post.favorites.count %>
       <% end %>
-    </p>
+  <% end %>
+  <% if @user == current_user %>
+    <%= link_to "編集",  edit_post_path(@post) %>
+    <%= link_to "削除",  post_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
   </div>
 
   <div>
     <p>コメント件数:<%= @post.post_comments.count %></p>
     <% @post.post_comments.each do |post_comment| %>
-      <p><%= attachment_image_tag post_comment.user, :profile_image, :fill, 50, 50, fallback: "default-image.jpg" %></p>
+      <%= attachment_image_tag post_comment.user, :profile_image, :fill, 50, 50, fallback: "default-image.jpg", size:'30x30' %>
       <%= post_comment.user.name %>
       <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
       <% if post_comment.user == current_user %>

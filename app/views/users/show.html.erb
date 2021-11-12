@@ -2,3 +2,53 @@
 <h3>ユーザー詳細画面</h3>
 
 <%= flash[:notice] %>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-3">
+      プロフィール
+      アイコン　名前
+      自己紹介
+      edit
+
+      ０フォロー
+      ０フォロワー
+
+      フォローする
+
+      投稿する
+
+      お気に入り
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>自分の投稿</h2>
+        <% @posts.each do |post| %>
+        <table class="table table-hover table-inverse ">
+            <tbody>
+                <tr>
+                    <td>
+                      <%= link_to user_path(post.user.id) do %>
+                       <p>プロフィール画像 投稿者名</p>
+                      <% end %>
+                       <%= link_to post.title, post_path(post.id) %><br>
+                       <%= post.song %><br>
+                       <%= post.artist %><br>
+                       <%= link_to post.body.truncate(24), post_path(post.id) %><br>
+                       <%= attachment_image_tag(post, :post_image, :fill, 150, 150) %><br >
+
+                         <% if post.favorited_by?(current_user) %>
+                          <%= link_to post_favorites_path(post), method: :delete do %>
+                            ♥<%= post.favorites.count %>
+                          <% end %>
+                         <% else %>
+                            <%= link_to post_favorites_path(post), method: :post do %>
+                                ♡<%= post.favorites.count %>
+                            <% end %>
+                         <% end %>
+                        <i class="far fa-comments">:<%= post.post_comments.count %></i>
+                    </td>
+                 </tr>
+            </tbody>
+        </table>
+        <% end %>
+  </div>
