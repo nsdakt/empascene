@@ -1,18 +1,29 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0">
 
-      <h2>ログイン</h2>
+      <div style="margin:10% auto; padding-left:20%; padding-bottom:20%;">
       <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-
+        <!--deviceエラー文-->
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <h2>ログイン</h2>
+        <br >
         <div class="field">
-          <%= f.label :name %><br />
-          <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+          <div>
+           <%= f.label :name %>
+          </div>
+          <div>
+           <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+          </div>
         </div>
 
         <div class="field">
-          <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "current-password" %>
+          <div>
+           <%= f.label :password %>
+          </div>
+          <div>
+           <%= f.password_field :password, autocomplete: "current-password" %>
+          </div>
         </div>
 
         <% if devise_mapping.rememberable? %>
@@ -21,11 +32,14 @@
             <%= f.label :remember_me %>
           </div>
         <% end %>
-
+        <br >
         <div class="actions">
-          <%= f.submit "Log in", class: "btn btn-sm btn-primary"%>
+          <%= f.submit "ただいま〜", class: "btn btn-sm btn-info", style: "width:180px;"%>
         </div>
       <% end %>
+      <br >
+      <br >
+      <!--新規登録画面リンク-->
       <%= render "devise/shared/links" %>
     </div>
   </div>

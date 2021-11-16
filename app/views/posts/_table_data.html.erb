@@ -21,7 +21,7 @@
     <div>
       <%= attachment_image_tag(post, :post_image, :fill, 150, 150) %><br >
     </div>
-    <div class="favorites-btn" style="display:inline;">
+    <div id="favorites-btn-<%= post.id %>" style="display:inline;">
       <%= render 'favorites/favorite-btn', post: post %>
     </div>
     <div class="comment_counts" style="display:inline;">
