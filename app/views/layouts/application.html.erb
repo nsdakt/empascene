@@ -10,21 +10,22 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar navbar-expand-lg" style="background-color:#FFCC99;">
+    <header class="sticky-top" style="background-color:#FFCC99;">
+      <nav class="navbar navbar-expand-lg">
         <div class="container">
+          <!--ロゴ-->
           <span class: "navbar-brand">
-          <% if user_signed_in? %>
-            <%= link_to posts_path do %>
-              <%= image_tag 'empascene_logo.png', :size => '130x100' %>
+            <% if user_signed_in? %>
+              <%= link_to posts_path do %>
+                <%= image_tag 'empascene_logo.png', :size => '130x100' %>
+              <% end %>
+            <% else %>
+              <%= link_to root_path do %>
+               <%= image_tag 'empascene_logo.png' , :size => '130x100' %>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to root_path do %>
-             <%= image_tag 'empascene_logo.png' , :size => '130x100' %>
-            <% end %>
-          <% end %>
           </span>
-
+          <!--ハンバーガーメニュー-->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -33,16 +34,15 @@
             <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
               <li>
-    　          <%= link_to 'ホーム', posts_path, class: "fas fa-home" %>
+    　          <%= link_to ' home', posts_path, class: "fas fa-icons" %>
               </li>
               <li>
-    　          <%= link_to 'マイページ', user_path(current_user.id) %>
-              </li>
-            　<li>
-     　           <%= link_to '投稿する ', new_post_path %>
+    　          <%= link_to ' myrecord', user_path(current_user.id), class: "fas fa-compact-disc" %>
+    　         </li>
+            　  <%= link_to 'write', new_post_path, class: "fas fa-sliders-h" %>
               </li>
               <li>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+               <%= link_to "byebye", destroy_user_session_path, method: :delete, class: "fas fa-door-open" %>
               </li>
             <% else %>
               <li>
@@ -55,7 +55,7 @@
                 <%= link_to "新規登録", new_user_registration_path %>
               </li>
               <li>
-                <%= link_to "ログイン", new_user_session_path %>
+                <%= link_to "Login", new_user_session_path, class: "fas fa-door-closed" %>
               </li>
             <% end %>
           </div>
@@ -67,17 +67,30 @@
          </div>
       <% end %>
     </header>
-    <%= yield %>
+    <main>
+     <%= yield %>
+    </main>
 
-
-    <footer>
-      <div style="background-color:#FFCC99;">
+    <% if user_signed_in? %>
+      <footer style="background-color:#FFCC99;">
         <div class="row">
           <div class="mx-auto">
+            <br >
             <p>©️ A-kit.planning</p>
+            <br >
           </div>
         </div>
-      </div>
-    </footer>
+      </footer>
+    <% else %>
+      <footer class="fixed-bottom" style="background-color:#FFCC99;">
+        <div class="row">
+          <div class="mx-auto">
+            <br >
+            <p class="text-right">©️ A-kit.planning</p>
+            <br >
+          </div>
+        </div>
+      </footer>
+    <% end %>
   </body>
 </html>

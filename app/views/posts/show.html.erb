@@ -1,28 +1,74 @@
 <h1>投稿詳細</h1>
 
-<div>
-  <p>投稿者：<%= link_to @user.name, user_path(@post.user.id) %></p>
-  <p>いつ聴く？：<%= @post.title %></p>
-  <p>曲名：<%= @post.song %></p>
-  <p>アーティスト：<%= @post.artist %></p>
-  <p>キャプション：<%=safe_join(@post.body.split("\n"),tag(:br))%></p>
-  <%= attachment_image_tag @post, :post_image, :fill, 400, 300 %>
-  <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <p class="favorites-btn" style="display:inline;">
-    <%= render 'favorites/favorite-btn', post: @post %>
-  </p>
-  <p class="comment_counts" style="display:inline;">
-    <%= render 'post_comments/counts', post: @post %>
-  </p>
-  <% if @user == current_user %>
-    <%= link_to "編集",  edit_post_path(@post) %>
-    <%= link_to "削除",  post_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
-  <% end %>
-  </div>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="col-md-8">
+      <table class="table">
+        <tr>
+          <%= link_to user_path(@post.user.id) do %>
+           <%= attachment_image_tag @post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
+           <%= @post.user.name %><br >
+          <% end %>
+        </tr>
+        <tr>
+          <td>
+            いつ聴く？：<%= @post.title %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            曲名：<%= @post.song %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            アーティスト：<%= @post.artist %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%=safe_join(@post.body.split("\n"),tag(:br))%>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= attachment_image_tag @post, :post_image, :fill, 400, 300 %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <%= @post.created_at.strftime('%Y/%m/%d') %>
+            <div id="favorites-btn-<%= @post.id %>" style="display:inline;">
+              <%= render 'favorites/favorite-btn', post: @post %>
+            </div>
+            <div class="comment_counts" style="display:inline;">
+              <%= render 'post_comments/counts', post: @post %>
+            </div>
+            <% if @post.user == current_user %>
+            <div style="display:inline;">
+            　<%= link_to edit_post_path(@post), class: "btn btn-sm btn-outline-secondary" do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+            </div>
+            <div style="display:inline;">
+              <%= link_to post_post_comment_path(@post), method: :delete, remote: true, class: "btn btn-sm btn-outline-secondary", "data-confirm" => "本当に削除しますか？" do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            </div>
+            <% end %>
+          </td>
+        </tr>
 
-  <div class="commentsArea">
-    <%= render 'post_comments/index', post: @post ,post_comment: @post_comment %>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <div class="inputComment">
+        <%= render 'post_comments/comment_form', post: @post, post_comment: @post_comment %>
+      </div>
+      <div class="commentsArea">
+       <%= render 'post_comments/index', post: @post ,post_comment: @post_comment %>
+      </div>
+    </div>
   </div>
-  <div class="inputComment">
-    <%= render 'post_comments/comment_form', post: @post, post_comment: @post_comment %>
-  </div>
+</div>
