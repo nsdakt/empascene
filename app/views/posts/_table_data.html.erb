@@ -1,9 +1,9 @@
 <!--一覧画面での投稿表示-->
-<tbody style="overflow-x: hidden; overflow-y: scroll;">
+<tbody>
   <td style="padding:5% 10%;">
-    <div style="margin-bottom:22px;">
+    <div class: "d-flex align-items-end" style="margin-bottom:22px;">
       <!--ユーザー詳細へリンク-->
-      <%= link_to user_path(post.user.id), class: "d-flex align-items-end" do %>
+      <%= link_to user_path(post.user.id) do %>
        <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"50x50" %>
        &emsp;
        <%= post.user.name %><br >

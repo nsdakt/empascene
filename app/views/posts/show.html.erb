@@ -1,8 +1,6 @@
-<h1>投稿詳細</h1>
-
 <div class="container px-5 px-sm-0">
-  <div class="row">
-    <div class="col-md-8">
+  <div class="row" style="padding:3%;">
+    <div class="col-md-6">
       <table class="table">
         <tr>
           <%= link_to user_path(@post.user.id) do %>
@@ -68,11 +66,12 @@
       </table>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-5 offset-md-1">
       <!--コメントフォーム-->
       <div class="inputComment">
         <%= render 'post_comments/comment_form', post: @post, post_comment: @post_comment %>
       </div>
+      <br >
       <!--コメント一覧-->
       <div class="commentsArea">
        <%= render 'post_comments/index', post: @post ,post_comment: @post_comment %>
