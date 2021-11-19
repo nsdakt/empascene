@@ -1,31 +1,63 @@
+<!--一覧画面での投稿表示-->
 <tbody>
-  <td>
-    <div>
+  <td style="padding:5% 10%;">
+    <div class: "d-flex align-items-end" style="margin-bottom:22px;">
+      <!--ユーザー詳細へリンク-->
       <%= link_to user_path(post.user.id) do %>
-       <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
+       <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"50x50" %>
+       &emsp;
        <%= post.user.name %><br >
       <% end %>
     </div>
-    <div>
-      <%= link_to post.title, post_path(post.id) %><br >
+    <!--投稿内容-->
+    <div style="margin-bottom:20px;">
+      <b>
+       <%= link_to post.title, post_path(post.id) %>
+      </b>
+    <br >
     </div>
-    <div>
+    <div style="margin-bottom:5px;">
+      <i class="fas fa-music"></i>
+      &nbsp;
       <%= post.song %><br>
     </div>
-    <div>
+    <div style="margin-bottom:25px;">
+      <i class="fas fa-microphone-alt"></i>
+      &nbsp;
       <%= post.artist %><br>
     </div>
-    <div>
+    <div style="margin-bottom:10px;">
+      <i class="fas fa-heartbeat"></i>
+      &nbsp;
       <%= link_to post.body.truncate(24), post_path(post.id) %><br>
     </div>
-    <div>
-      <%= attachment_image_tag(post, :post_image, :fill, 150, 150) %><br >
+    <div style="margin-bottom:10px;">
+      <%= link_to attachment_image_tag(post, :post_image, :fill, 320, 180), post_path(post.id) %><br >
     </div>
+    <!--お気に入りボタン-->
     <div id="favorites-btn-<%= post.id %>" style="display:inline;">
       <%= render 'favorites/favorite-btn', post: post %>
     </div>
+    &ensp;
+    <!--コメント数-->
     <div class="comment_counts" style="display:inline;">
       <%= render 'post_comments/counts', post: post %>
     </div>
+    &emsp;
+    <!--投稿編集ボタン-->
+    <% if post.user == current_user %>
+    <div style="display:inline;" %>
+      <%= link_to edit_post_path(post) do %>
+       <%= render 'posts/edit_btn' %>
+      <% end %>
+    </div>
+    &ensp;
+    <!--投稿削除ボタン-->
+    <div style="display:inline;">
+      <%= link_to post_path(post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" do %>
+         <%= render 'posts/delete_btn' %>
+      <% end %>
+    </div>
+    <% end %>
   </td>
 </tbody>

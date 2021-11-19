@@ -3,6 +3,6 @@
       <%= text_field_tag 'content' %><br >
       <%= select_tag 'model', options_for_select({ "投稿" => "post", "ユーザー" => "user" }) %>
       <%= select_tag 'method', options_for_select({ "部分一致" => "partial", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "perfect" }) %>
-      <%= submit_tag '検索' %>
+      <%= submit_tag '検索'%>
     <% end %>
 <% end %>

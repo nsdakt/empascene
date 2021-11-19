@@ -1,23 +1,36 @@
-<h2>新規登録後遷移ページ</h2>
-<h3>ユーザー詳細画面</h3>
-
 <%= flash[:notice] %>
 <div class="container px-5 px-sm-0">
-  <div class="row">
+  <div class="row" style="padding:3%;">
+    <!--サイドバー-->
     <div class="col-md-4">
      <%= render 'users/user_info', user: @user %>
-　   <%= link_to '投稿する ', new_post_path %>
-　   <%= render 'searches/search_form' %>
-
-      お気に入り
+     <br >
+     <div>
+       <%= link_to '投稿する ', new_post_path %>
+     </div>
+    <br >
+    <div>
+     お気に入り
+    </div>
+    <br >
+    <%= render 'searches/search_form' %>
+      <br >
+      <br >
     </div>
 
-    <div class="col-md-8">
-      <h2>自分の投稿</h2>
-      <table class="table table-hover table-inverse">
-        <% @posts.each do |post| %>
-          <%= render 'posts/table_data', post: post %>
-        <% end %>
-      </table>
+    <!--投稿一覧-->
+    <div class="col-md-7 offset-md-1">
+      <br >
+      <h2 class="text-center", style="mergin:5%;">自分の投稿</h2>
+      <% if @posts.exists? %>
+        <table class="table table-hover table-inverse">
+          <% @posts.each do |post| %>
+            <!--投稿一覧テンプレート-->
+            <%= render 'posts/table_data', post: post %>
+          <% end %>
+        </table>
+      <% else %>
+        <p>投稿はまだありません</p>
+      <% end %>
     </div>
   </div>

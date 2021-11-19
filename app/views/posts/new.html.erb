@@ -1,32 +1,40 @@
-<h2 class="mt-3">新規投稿</h2>
-<%= form_with model: @post, local:true do |f| %>
-  <div class="form-group">
-    <label>どんな気持ち？</label><br/>
-    <%= f.text_field :title, class: "form-control post_title", placeholder:"" %>
-  </div>
+<div class="container px-5 px-sm-0">
+  <div class="row justify-content-center">
+    <div class="col-md-8" style="margin:3%;">
 
-  <div class="form-group">
-    <label></label><br/>
-    <%= f.text_field :song, class: "form-control post_song", placeholder:"曲名" %>
-  </div>
+      <h3 >新規投稿</h3>
+      <br >
+      <!--投稿フォーム-->
+      <%= form_with model: @post, local:true do |f| %>
+        <div class="form-group">
+          <%= f.text_field :title, class: "form-control post_title", placeholder:"友達との待ち合わせに向かう楽しい気分に♪" %>
+          <br >
+        </div>
 
-  <div class="form-group">
-    <label></label><br/>
-    <%= f.text_field :artist, class: "form-control post_artist", placeholder:"アーティスト" %>
-  </div>
+        <div class="form-group">
+          <%= f.text_field :song, class: "form-control post_song", placeholder:"曲名" %>
+          <br >
+        </div>
 
-  <div class="form-group">
-    <label></label><br/>
-    <%= f.text_area :body, class: "form-control post_body", placeholder:"久しぶりに会う友人との待ち合わせ場所まで" %>
-  </div>
+        <div class="form-group">
+          <%= f.text_field :artist, class: "form-control post_artist", placeholder:"アーティスト名" %>
+          <br >
+        </div>
 
-  <div class="form-group">
-    <label></label><br/>
-    <%= f.attachment_field :post_image %>
-  </div>
+        <div class="form-group">
+          <%= f.text_area :body, class: "form-control post_body", placeholder:"久しぶりに会う友達との待ち合わせに向かう電車で聴いていました！" %>
+        </div>
 
-  <div class="form-group">
-    <%= f.submit 'シェアする' %>
-  </div>
+        <div class="form-group">
+          <%= f.attachment_field :post_image %>
+          <br >
+        </div>
+        <br >
+        <div class="form-group">
+          <%= f.submit 'シェアする', class: "btn btn-outline-info" %>
+        </div>
 
-<% end %>
+      <% end %>
+      </div>
+    </div>
+  </div>

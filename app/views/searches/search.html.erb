@@ -1,7 +1,8 @@
+<!--検索結果表示画面へ-->
 <% if @model == 'user' %>
-  <h3>Users search for "<%= @content %>"</h3>
+  <h3>ユーザー検索結果 "<%= @content %>"</h3>
   <%= render 'users/search_user_index', users: @records %>
 <% else @model == 'posts' %>
-  <h3>Posts search for "<%= @content %>"</h3>
+  <h3>投稿検索結果 for "<%= @content %>"</h3>
     <%= render 'posts/search_post_index', posts: @records %>
 <% end %>

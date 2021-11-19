@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.page(params[:page]).reverse_order
+    @posts = Post.page(params[:page]).per(10).reverse_order
     @user = current_user
   end
 
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     if @post.user == current_user
       render "edit"
     else
-      redirect_to books_path
+      redirect_to post_path
     end
   end
 
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.user_id = current_user.id
     if @post.update(post_params)
-     flash[:notice] = "編集しました！"
+     flash[:notice] = "投稿を編集しました！"
      redirect_to post_path(@post.id)
     else
      render :edit
