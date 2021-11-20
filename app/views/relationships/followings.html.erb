@@ -2,26 +2,22 @@
   <div class="row" style="margin:3% 5%;">
 
     <!--サイドバー-->
-    <div class="col-md-3">
-      <%= render 'users/user_info', user: @user %>
-      <br >
-      <div>
-        <%= link_to '投稿する', new_post_path %>
+    <div class="side col-md-4">
+     <%= render 'users/user_info', user: @user %>
+      <div style="padding:3%;">
+       <%= link_to '投稿する ', new_post_path, class: "btn btn-block btn-outline-warning" %>
+      </div>
+      <div style="padding:3%;">
+       お気に入り
       </div>
       <br >
-      <div>
-        お気に入り
-      </div>
+      <%= render 'searches/search_form' %>
       <br >
-      <div>
-        <%= render 'searches/search_form' %>
-        <br >
-        <br >
-      </div>
+      <br >
     </div>
 
     <!--フォロー一覧-->
-    <div class="col-md-8 offset-md-1">
+    <div class="col-md-7 offset-md-1">
       <% if @users.exists? %>
         <table class="table table-hover">
           <thead>
@@ -29,7 +25,9 @@
               <th>
                 <h3>フォロー中</h3>
               </th>
-              <th></th>
+              <th>
+                <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+              </th>
             </tr>
           </thead>
           <tbody>

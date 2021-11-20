@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+
+  before_action :authenticate_user!
   before_action :post_params
 
   def create

@@ -1,0 +1,7 @@
+<% if @favorites_posts.present? %>
+  <% @favorite_posts.each do |post|%>
+    <%= link_to post.user.name, user_path(post.user.id) %>
+  <% end %>
+<% else %>
+  <p>ブックマーク中の掲示板がありません</p>
+<% end%>

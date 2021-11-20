@@ -34,12 +34,15 @@
         <% end %>
         <br >
         <div class="actions">
-          <%= f.submit "ただいま〜", class: "btn btn-sm btn-info", style: "width:180px;"%>
+          <%= f.submit "ログイン", class: "btn btn-sm btn-info", style: "width:180px;"%>
         </div>
       <% end %>
       <br >
       <br >
       <!--新規登録画面リンク-->
       <%= render "devise/shared/links" %>
+      <div class="text-right" style="margin:20px 0;">
+     　 <%= link_to " もどる", root_path, class: "fas fa-reply text-right" %>
+      </div>
     </div>
   </div>
