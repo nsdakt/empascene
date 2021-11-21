@@ -1,10 +1,14 @@
 class SearchesController < ApplicationController
 
+  before_action :authenticate_user!
+
   def search
     @model = params["model"]
     @content = params["content"]
     @method = params["method"]
     @records = search_for(@model, @content, @method)
+    # @users = User.all
+    # @user = current_user
   end
 
   private

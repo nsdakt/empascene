@@ -1,68 +1,99 @@
 <div class="container px-5 px-sm-0">
   <div class="row" style="padding:3%;">
+
     <div class="col-md-6">
-      <table class="table">
-        <tr>
-          <%= link_to user_path(@post.user.id) do %>
-           <%= attachment_image_tag @post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
-           <%= @post.user.name %><br >
-          <% end %>
-        </tr>
-        <tr>
-          <td>
-            いつ聴く？：<%= @post.title %>
+      <table class="table table-borderless">
+        <tr class="display:inline">
+          <td style="padding:5px 50px;">
+            <!--ユーザー名・画像-->
+            <%= link_to user_path(@post.user.id) do %>
+             <%= attachment_image_tag @post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"50x50" %>
+             &emsp;
+             <%= @post.user.name %>
+            <% end %>
+            &emsp;
+            &emsp;
+            <!--フォローボタン-->
+            <% unless current_user == @user %>
+              <% if @user.followed_by?(current_user) %>
+                 <%= link_to "フォロー中", user_relationships_path(@user.id), method: :delete, class: "btn btn-sm btn-info" %>
+              <% else %>
+                 <%= link_to "フォローする", user_relationships_path(@user.id), method: :post, class: "btn btn-sm btn-outline-info" %>
+              <% end %>
+            <% end %>
           </td>
         </tr>
         <tr>
-          <td>
-            曲名：<%= @post.song %>
+          <!--タイトル-->
+          <td style="padding:20px 50px;">
+            <b>
+              <i class="fas fa-heartbeat"></i>
+              &emsp;
+              <%= @post.title %>
+            </b>
           </td>
         </tr>
         <tr>
-          <td>
-            アーティスト：<%= @post.artist %>
+          <!--曲名-->
+          <td style="padding:10px 50px;">
+            <i class="fas fa-music"></i>
+            &emsp;
+            <%= @post.song %>
           </td>
         </tr>
         <tr>
-          <td>
+          <!--アーティスト-->
+          <td style="padding:10px 50px;">
+            <i class="fas fa-microphone-alt"></i>
+            &emsp;
+            <%= @post.artist %>
+          </td>
+        </tr>
+        <tr>
+          <!--本文-->
+          <td style="padding:20px 60px;">
             <%=safe_join(@post.body.split("\n"),tag(:br))%>
           </td>
         </tr>
         <tr>
-          <td>
-            <%= attachment_image_tag @post, :post_image, :fill, 400, 400 %>
+          <!--画像-->
+          <td style="padding:10px 30px;">
+            <%= attachment_image_tag @post, :post_image, :fill, 550, 450 %>
           </td>
         </tr>
         <tr>
-          <td>
+          <td style="padding:10px 50px;">
+
             <!--お気に入りボタン-->
-            <%= @post.created_at.strftime('%Y/%m/%d') %>
-            <div id="favorites-btn-<%= @post.id %>" style="display:inline;">
+            <div id="favorites-btn-<%= @post.id %>" style="display:inline; margin:0 3%;">
               <%= render 'favorites/favorite-btn', post: @post %>
             </div>
-            &ensp;
             <!--コメント数表示-->
-            <div class="comment_counts" style="display:inline;">
-              <%= render 'post_comments/counts', post: @post %>
+            <div class="comment_counts" style="display:inline; margin:0 3%;">
+              <%= link_to post_path(@post) do %>
+               <%= render 'post_comments/counts', post: @post %>
+              <% end %>
             </div>
             <!--投稿編集ボタン-->
             <% if @post.user == current_user %>
-            <div style="display:inline;">
-            　<%= link_to edit_post_path(@post) do %>
+            <div style="display:inline; margin:0 3%;">
+             <%= link_to edit_post_path(@post) do %>
                 <%= render 'posts/edit_btn' %>
               <% end %>
             </div>
-            &ensp;
             <!--投稿削除ボタン-->
-            <div style="display:inline;">
+            <div style="display:inline; margin:0 3%;">
               <%= link_to post_path(@post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" do %>
                 <%= render 'posts/delete_btn' %>
               <% end %>
             </div>
+            <!--投稿日-->
+            <div class="text-right" style="display:inline; margin-left:35%;">
+              <%= @post.created_at.strftime('%Y/%m/%d') %>
+            </div>
             <% end %>
           </td>
         </tr>
-
       </table>
     </div>
 
@@ -76,6 +107,9 @@
       <div class="commentsArea">
        <%= render 'post_comments/index', post: @post ,post_comment: @post_comment %>
       </div>
+    </div>
+    <div style="text-right">
+      <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
     </div>
   </div>
 </div>

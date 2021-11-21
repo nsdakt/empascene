@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_action :authenticate_user!
+
   def index
     @posts = Post.page(params[:page]).per(10).reverse_order
     @user = current_user
@@ -50,6 +52,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     redirect_to posts_path
+  end
+
+
+  def search
+    @user = current_user
   end
 
   private

@@ -1,12 +1,37 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-/*編集ボタン色*/
+
+// 編集ボタン色
 .edit_btn{
   color:#544a47;
 }
 
-/*削除ボタン色*/
+// 削除ボタン色
 .delete_btn{
   color:#544a47;
 }
+
+// 曲名アイコン
+.fa-music{
+  color:#84a2d4;
+}
+
+// アーティスト名アイコン
+.fa-microphone-alt{
+  color:#ec6d51;
+}
+
+// .wrapper{
+//   overflow-x: hidden;
+//   overflow-y: scroll;
+//   left: 0;
+// }
+
+// div.side{
+//   // position: -webkit-sticky;
+//   position: sticky;
+//   top: 0;
+// }
+
+

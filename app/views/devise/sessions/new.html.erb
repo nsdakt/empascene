@@ -9,6 +9,7 @@
         <h2>ログイン</h2>
         <br >
         <div class="field">
+          <!--ユーザー名-->
           <div>
            <%= f.label :name %>
           </div>
@@ -16,30 +17,33 @@
            <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
           </div>
         </div>
-
         <div class="field">
-          <div>
+          <!--パスワード-->
+          <div style="margin-top:15px;">
            <%= f.label :password %>
           </div>
           <div>
            <%= f.password_field :password, autocomplete: "current-password" %>
           </div>
         </div>
-
         <% if devise_mapping.rememberable? %>
-          <div class="field">
+          <div class="field" style="margin-top:10px;">
             <%= f.check_box :remember_me %>
-            <%= f.label :remember_me %>
+            <%= f.label "ログイン状態を保存" %>
           </div>
         <% end %>
         <br >
+
         <div class="actions">
-          <%= f.submit "ただいま〜", class: "btn btn-sm btn-info", style: "width:180px;"%>
+          <%= f.submit "ただいま", class: "btn btn-sm btn-info", style: "width:180px;"%>
         </div>
       <% end %>
       <br >
       <br >
       <!--新規登録画面リンク-->
       <%= render "devise/shared/links" %>
+      <div class="text-right" style="margin:20px 0;">
+     　 <%= link_to " もどる", root_path, class: "fas fa-reply text-right" %>
+      </div>
     </div>
   </div>

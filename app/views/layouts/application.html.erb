@@ -9,9 +9,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <!--<body>-->
   <body>
-    <header class="sticky-top" style="background-color:#ffe5cc;">
-      <nav class="navbar navbar-expand-lg">
+    <!--ヘッダー-->
+    <header class="sticky-top" style="background-color:#ffffff;">
+      <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <!--ロゴ-->
           <span class: "navbar-brand">
@@ -25,54 +27,92 @@
               <% end %>
             <% end %>
           </span>
+
           <!--ハンバーガーメニュー-->
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="navbar-collapse collapse show" id="navbarNavDropdown" style>
+          <div class="navbar-collapse collapse show" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+            <!--ログイン時-->
             <% if user_signed_in? %>
-              <li>
-    　          <%= link_to ' home', posts_path, class: "fas fa-icons" %>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to posts_path do %>
+                   <i class="fas fa-icons"></i> home
+                  <% end %>
+                </b>
               </li>
-              <li>
-    　          <%= link_to ' myrecord', user_path(current_user.id), class: "fas fa-compact-disc" %>
-    　         </li>
-            　  <%= link_to 'write', new_post_path, class: "fas fa-sliders-h" %>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to home_about_path do %>
+                   <i class="fas fa-heartbeat"></i> about
+                  <% end %>
+                </b>
               </li>
-              <li>
-               <%= link_to "byebye", destroy_user_session_path, method: :delete, class: "fas fa-door-open" %>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to user_path(current_user.id) do %>
+                   <i class="fas fa-compact-disc"></i> myrecord
+                  <% end %>
+                </b>
+              </li>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to new_post_path do %>
+                   <i class="fas fa-sliders-h"></i> write
+                  <% end %>
+                </b>
+              </li>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to ' logout', destroy_user_session_path, method: :delete, class: "fas fa-door-open" %>
+                </b>
               </li>
             <% else %>
-              <li>
-            　   <%= link_to 'Home', root_path, class: "fas fa-home" %>
+            <!--ログイン前-->
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to root_path do %>
+                   <i class="fas fa-home"></i> Home
+                  <% end %>
+                </b>
               </li>
-              <li>
-            　   <%= link_to 'About', home_about_path, class: "fas fa-heartbeat" %>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to home_about_path do %>
+                   <i class="fas fa-heartbeat"></i> About
+                  <% end %>
+                </b>
               </li>
-              <li>
-                <%= link_to "新規登録", new_user_registration_path %>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to new_user_registration_path do %>
+                   <i class="fas fa-sign-in-alt"></i> Signup
+                  <% end %>
+                </b>
               </li>
-              <li>
-                <%= link_to "Login", new_user_session_path, class: "fas fa-door-closed" %>
+              <li style="margin-right:20px;">
+                <b>
+                  <%= link_to new_user_session_path do %>
+                   <i class="fas fa-door-closed"></i> Login
+                  <% end %>
+                </b>
               </li>
             <% end %>
+            </ul>
           </div>
         </div>
       </nav>
-      <% unless controller.controller_name == 'homes' && controller.action_name == 'top' %>
-       <div class="center">
-
-         </div>
-      <% end %>
     </header>
+
     <main>
      <%= yield %>
     </main>
 
     <% if user_signed_in? %>
-      <footer style="background-color:#FFCC99;">
+      <footer style="background-color:#ffffff;">
         <div class="row">
           <div class="mx-auto">
             <br >
@@ -82,7 +122,7 @@
         </div>
       </footer>
     <% else %>
-      <footer class="fixed-bottom" style="background-color:#FFCC99;">
+      <footer class="fixed-bottom" style="background-color:#ffffff;">
         <div class="row">
           <div class="mx-auto">
             <br >

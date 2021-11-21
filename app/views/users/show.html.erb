@@ -3,19 +3,7 @@
   <div class="row" style="padding:3%;">
     <!--サイドバー-->
     <div class="col-md-4">
-     <%= render 'users/user_info', user: @user %>
-     <br >
-     <div>
-       <%= link_to '投稿する ', new_post_path %>
-     </div>
-    <br >
-    <div>
-     お気に入り
-    </div>
-    <br >
-    <%= render 'searches/search_form' %>
-      <br >
-      <br >
+     <%= render 'users/sidebar', user: @user %>
     </div>
 
     <!--投稿一覧-->
@@ -32,5 +20,8 @@
       <% else %>
         <p>投稿はまだありません</p>
       <% end %>
+      <div class="text-right">
+     　<%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+    　</div>
     </div>
   </div>

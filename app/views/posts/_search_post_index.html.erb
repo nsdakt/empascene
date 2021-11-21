@@ -1,36 +1,140 @@
+<!--検索結果一覧(投稿)-->
 <div class="container px-5 px-sm-0">
-  <div class="row">
-    <% if posts.exists? %>
+  <div class="row" style="margin:3%;">
+
+    <!--サイドバー-->
+    <div class="col-md-4">
       <table class="table">
-        <thead>
+        <tbody>
           <tr>
-            <th></th>
-            <th>Title</th>
-            <th>Opinion</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody id="post">
-        <% posts.each do |post| %>
-          <tr>
-            <td>
-              <%= attachment_image_tag post.user, :profile_image, :fill, 20, 20, fallback: "default-image.jpg", size: "60x60" %>
+            <!--画像、ユーザー名-->
+            <td class="text-center" style="padding:20px 10px;">
+              <%= link_to user_path(current_user) do %>
+                <%= attachment_image_tag current_user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
+                &emsp;
+                <%= current_user.name %>
+              <% end %>
+              &emsp;
+              &emsp;
+              <!--編集ボタン-->
+                <%= link_to  edit_user_path(current_user), class: "btn btn-outline-secondary" do %>
+                 <span class="fas fa-cog"></span>
+                <% end %>
             </td>
-            <td><%= link_to post.title, post_path(post) %></td>
-            <td><%= post.body %></td>
-            <% if post.user == current_user %>
-              <td><%= link_to "編集", edit_post_path(post) %></td>
-              <td><%= link_to "削除", post_path(post), method: :delete, remote: true %></td>
-            <% else %>
-              <td></td>
-              <td></td>
-            <% end %>
+          <tr>
+          <tr>
+            <!--自己紹介文-->
+            <td class="text-center" style="padding:25px 15px;">
+              <% if current_user.introduction.present?%>
+                 <%=safe_join(current_user.introduction.split("\n"),tag(:br))%>
+              <% else %>
+               <%= current_user.introduction %>
+              <% end %>
+            </td>
           </tr>
-        <% end %>
+          <tr>
+            <!--フォローフォロワー数-->
+            <td class="text-center" style="padding:20px 20px;">
+              <%= link_to user_followings_path(current_user.id) do %>
+                <%= current_user.followings.count %>フォロー中
+              <% end %>
+              &emsp;
+              |
+              &emsp;
+              <%= link_to user_followers_path(current_user.id) do %>
+                <%=  current_user.followers.count %>フォロワー
+              <% end %>
+            </td>
+          </tr>
         </tbody>
       </table>
-    <% else %>
-     <p>一致する検索結果はありません</p>
-    <% end %>
+      <div style="padding:3%;">
+       <%= link_to '投稿する ', new_post_path, class: "btn btn-block btn-outline-warning" %>
+      </div>
+      <div style="padding:3%;">
+        <%= link_to 'お気に入り', favorites_user_path(current_user), class: "btn btn-block btn-outline-warning" %>
+      </div>
+      <br >
+      <%= render 'searches/search_form' %>
+      <br >
+      <br >
+    </div>
+
+  <!--検索結果（投稿）-->
+    <div class="col-md-7 offset-md-1">
+      <% if posts.exists? %>
+        <table class="table table-hover">
+          <% posts.each do |post| %>
+            <tbody>
+              <td style="padding:5% 10%;">
+                <div class: "d-flex align-items-end" style="margin-bottom:22px;">
+                  <!--ユーザー詳細へリンク-->
+                  <%= link_to user_path(post.user.id) do %>
+                   <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"50x50" %>
+                   &emsp;
+                   <%= post.user.name %><br >
+                  <% end %>
+                </div>
+                <!--投稿内容-->
+                <div style="margin-bottom:20px;">
+                  <b>
+                   <%= link_to post.title, post_path(post.id) %>
+                  </b>
+                  <br >
+                </div>
+                <div style="margin-bottom:5px;">
+                  <i class="fas fa-music"></i>
+                  &nbsp;
+                  <%= post.song %><br>
+                </div>
+                <div style="margin-bottom:25px;">
+                  <i class="fas fa-microphone-alt"></i>
+                  &nbsp;
+                  <%= post.artist %><br>
+                </div>
+                <div style="margin-bottom:10px;">
+                  <i class="fas fa-heartbeat"></i>
+                  &nbsp;
+                  <%= link_to post.body.truncate(24), post_path(post.id) %><br>
+                </div>
+                <div style="margin-bottom:10px;">
+                  <%= link_to attachment_image_tag(post, :post_image, :fill, 320, 180), post_path(post.id) %><br >
+                </div>
+                <!--お気に入りボタン-->
+                <div id="favorites-btn-<%= post.id %>" style="display:inline;">
+                  <%= render 'favorites/favorite-btn', post: post %>
+                </div>
+                &ensp;
+                <!--コメント数-->
+                <div class="comment_counts" style="display:inline;">
+                  <%= render 'post_comments/counts', post: post %>
+                </div>
+                &emsp;
+                <!--投稿編集ボタン-->
+                <% if post.user == current_user %>
+                <div style="display:inline;" %>
+                  <%= link_to edit_post_path(post) do %>
+                   <%= render 'posts/edit_btn' %>
+                  <% end %>
+                </div>
+                &ensp;
+                <!--投稿削除ボタン-->
+                <div style="display:inline;">
+                  <%= link_to post_path(post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" do %>
+                     <%= render 'posts/delete_btn' %>
+                  <% end %>
+                </div>
+                <% end %>
+              </td>
+            </tbody>
+          <% end %>
+        </table>
+      <% else %>
+         <p>一致する検索結果はありません</p>
+      <% end %>
+      <div class="text-right">
+     　　<%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+    　</div>
+    </div>
   </div>
 </div>
