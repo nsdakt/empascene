@@ -1,7 +1,28 @@
-<% if @favorites_posts.present? %>
-  <% @favorite_posts.each do |post|%>
-    <%= link_to post.user.name, user_path(post.user.id) %>
-  <% end %>
-<% else %>
-  <p>ブックマーク中の掲示板がありません</p>
-<% end%>
+<div class="container px-5 px-sm-0">
+  <div class="row" style="padding:3%;">
+
+    <!--サイドバー-->
+    <div class="col-md-4">
+     <%= render 'users/sidebar', user: @user %>
+    </div>
+
+    <div class="col-md-7 offset-md-1">
+    <% if @favorite_posts.present? %>
+      <table class="table table-hover table-inverse">
+        <%= render partial: "posts/table_data", collection: @favorite_posts, as: "post" %>
+      </table>
+
+      <div style="text-right">
+        <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
+      </div>
+    <% else %>
+      <div>
+        <p>お気に入りした投稿はありません</p>
+      </div>
+      <div style="text-right">
+        <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
+      </div>
+    <% end%>
+    </div>
+  </div>
+</div>

@@ -52,7 +52,7 @@
        <%= link_to '投稿する ', new_post_path, class: "btn btn-block btn-outline-warning" %>
       </div>
       <div style="padding:3%;">
-       お気に入り
+        <%= link_to 'お気に入り', favorites_user_path(current_user), class: "btn btn-block btn-outline-warning" %>
       </div>
       <br >
       <%= render 'searches/search_form' %>

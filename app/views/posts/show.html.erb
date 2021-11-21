@@ -5,6 +5,7 @@
       <table class="table table-borderless">
         <tr class="display:inline">
           <td style="padding:5px 50px;">
+            <!--ユーザー名・画像-->
             <%= link_to user_path(@post.user.id) do %>
              <%= attachment_image_tag @post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"50x50" %>
              &emsp;
@@ -12,6 +13,7 @@
             <% end %>
             &emsp;
             &emsp;
+            <!--フォローボタン-->
             <% unless current_user == @user %>
               <% if @user.followed_by?(current_user) %>
                  <%= link_to "フォロー中", user_relationships_path(@user.id), method: :delete, class: "btn btn-sm btn-info" %>
@@ -61,17 +63,16 @@
         </tr>
         <tr>
           <td style="padding:10px 50px;">
-            <!--投稿日-->
-            <div style="display:inline; margin-right:5%;">
-              <%= @post.created_at.strftime('%Y/%m/%d') %>
-            </div>
+
             <!--お気に入りボタン-->
             <div id="favorites-btn-<%= @post.id %>" style="display:inline; margin:0 3%;">
               <%= render 'favorites/favorite-btn', post: @post %>
             </div>
             <!--コメント数表示-->
             <div class="comment_counts" style="display:inline; margin:0 3%;">
-              <%= render 'post_comments/counts', post: @post %>
+              <%= link_to post_path(@post) do %>
+               <%= render 'post_comments/counts', post: @post %>
+              <% end %>
             </div>
             <!--投稿編集ボタン-->
             <% if @post.user == current_user %>
@@ -85,6 +86,10 @@
               <%= link_to post_path(@post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" do %>
                 <%= render 'posts/delete_btn' %>
               <% end %>
+            </div>
+            <!--投稿日-->
+            <div class="text-right" style="display:inline; margin-left:35%;">
+              <%= @post.created_at.strftime('%Y/%m/%d') %>
             </div>
             <% end %>
           </td>

@@ -2,18 +2,8 @@
   <div class="row" style="margin:3% 5%;">
 
     <!--サイドバー-->
-    <div class="side col-md-4">
-     <%= render 'users/user_info', user: @user %>
-      <div style="padding:3%;">
-       <%= link_to '投稿する ', new_post_path, class: "btn btn-block btn-outline-warning" %>
-      </div>
-      <div style="padding:3%;">
-       お気に入り
-      </div>
-      <br >
-      <%= render 'searches/search_form' %>
-      <br >
-      <br >
+    <div class="col-md-4">
+     <%= render 'users/sidebar', user: @user %>
     </div>
 
     <!--フォロワー一覧-->
