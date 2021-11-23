@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-     if @user.update(user_params)
+     if update(@user.user_params)
        flash[:success] = "変更を保存しました！"
        redirect_to user_path(current_user.id)
      else
