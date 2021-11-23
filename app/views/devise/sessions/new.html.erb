@@ -4,13 +4,12 @@
 
       <div style="margin:10% auto; padding-left:20%; padding-bottom:20%;">
       <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-        <h2>ログイン</h2>
+        <h4>ログイン</h4>
         <!--deviceエラー文-->
         <%- flash.each do |name, msg| -%>
           <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
         <%- end -%>
-        <%= render "devise/shared/error_messages", resource: @user %>
-
+        <br >
         <div class="field">
           <!--ユーザー名-->
           <div>
