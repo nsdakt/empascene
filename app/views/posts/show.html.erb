@@ -71,7 +71,7 @@
             <!--コメント数表示-->
             <div class="comment_counts" style="display:inline; margin:0 3%;">
               <%= link_to post_path(@post) do %>
-               <%= render 'post_comments/counts', post: @post %>
+              <%= render 'post_comments/counts', post: @post %>
               <% end %>
             </div>
             <!--投稿編集ボタン-->
@@ -83,7 +83,7 @@
             </div>
             <!--投稿削除ボタン-->
             <div style="display:inline; margin:0 3%;">
-              <%= link_to post_path(@post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" do %>
+              <%= link_to post_path(@post), method: :delete, local: true, "data-confirm" => "本当に削除しますか？" do %>
                 <%= render 'posts/delete_btn' %>
               <% end %>
             </div>

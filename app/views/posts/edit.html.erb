@@ -2,36 +2,39 @@
   <div class="row justify-content-center">
     <div class="col-md-8" style="margin:3%; padding-bottom:3%;">
       <h3>投稿を編集する</h3>
-      <br>
-      <!--エラー文-->
-      <% if @post.errors.any? %>
-       <%= @post.errors.count %>errors prohibited this post from being saved:
-        <ul>
-         <% @post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-         <% end %>
-        </ul>
-      <% end %>
+
+            <!--エラーメッセージ-->
+      <div id="error_explanation">
+        <% if @post.errors.any? %>
+         <ul>
+          <% @post.errors.full_messages.each do |message| %>
+           <li><%= message %></li>
+          <% end %>
+         </ul>
+        <% end %>
+      </div>
+      <br >
 
        <!--編集フォーム-->
       <%= form_with model:@post, url: post_path, local:true do |f| %>
        <div class="form-group">
-        <%= f.text_field :title, class: "form-control post_title", placeholder:"友達との待ち合わせに向かう楽しい気分に♪" %>
+        <%= f.text_field :title, class: "form-control post_title", placeholder:"どんな気分？：例）友達との待ち合わせに向かう楽しい気分に♪" %>
         <br >
        </div>
 
        <div class="form-group">
-        <%= f.text_field :song, class: "form-control post_song", placeholder:"曲名" %>
+        <%= f.text_field :song, class: "form-control post_song", placeholder:"なんて曲？" %>
         <br >
        </div>
 
        <div class="form-group">
-        <%= f.text_field :artist, class: "form-control post_artist", placeholder:"アーティスト名" %>
+        <%= f.text_field :artist, class: "form-control post_artist", placeholder:"だれの曲" %>
         <br>
        </div>
 
        <div class="form-group">
-        <%= f.text_area :body, class: "form-control post_body", placeholder:"久しぶりに会う友達との待ち合わせに向かう電車で聴いていました！" %>
+        <%= f.text_area :body, class: "form-control post_body",
+        placeholder:"この曲のエピソード教えて！：例）久しぶりに会う友達との待ち合わせに向かう電車で聴いていました！" %>
        </div>
        <br >
        <div class="form-group">

@@ -12,11 +12,11 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>
-                <h3>フォロワー</h3>
+              <th colspan="2" class="text-center">
+                <h4>フォロワー</h4>
               </th>
-              <th>
-               <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+              <th style="font-size:13px;">
+                <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
               </th>
             </tr>
           </thead>
@@ -36,6 +36,7 @@
                     <% end %>
                   <% end %>
                 </td>
+                <td></td>
                 <!--フォローボタン-->
                 <% unless current_user == user %>
                   <td class="display:inline;">
@@ -47,13 +48,17 @@
                       <%= link_to "フォローする", user_relationships_path(user.id), method: :POST, class: "btn btn-sm btn-outline-info" %>
                     <% end %>
                   </td>
+                <% else %>
+                <td></td>
                 <% end %>
               </tr>
             <% end %>
           </tbody>
         </table>
       <% else %>
-       <p>フォローされているユーザーはいません</p>
+       <tbody>
+        <td class="text-center" style="padding:10% 0;">フォローされているユーザーはいません</td>
+      </tbody>
       <% end %>
     </div>
   </div>

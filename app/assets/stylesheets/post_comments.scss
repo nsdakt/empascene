@@ -11,3 +11,22 @@
 .comment_index{
   color:#028760;
 }
+
+/*コメント下線*/
+.comment_line{
+  border-bottom:dotted;
+  border-color:#028760;
+  border-width:3px;
+}
+
+.inputComment {
+	background: white;
+	position: sticky;
+	top: 14%;
+}
+
+.comment-head {
+	background: white;
+	position: sticky;
+	top: 38%;
+}

@@ -1,8 +1,13 @@
 <% if user_signed_in? %>
     <%= form_tag(search_path, method: :get) do %>
-      <%= text_field_tag 'content' %><br >
+      <span style="margin:20px;">
+        <%= text_field_tag 'content', "", {size: "30"} %>
+      </span>
+      <br >
       <%= select_tag 'model', options_for_select({ "投稿" => "post", "ユーザー" => "user" }) %>
+     &thinsp;
       <%= select_tag 'method', options_for_select({ "部分一致" => "partial", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "perfect" }) %>
-      <%= submit_tag '検索'%>
+     &emsp;
+      <%= submit_tag '検索' %>
     <% end %>
 <% end %>

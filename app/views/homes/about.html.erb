@@ -1,16 +1,35 @@
-<div class="container">
-  <div class="row justify-content-center">
+<div class="container px-5 px-sm-0">
+  <div class="row justify-content-center" style="padding:3%;">
     <div class="mx-auto coll-11 col-sm-10 col-lg8 col-xl-6">
 
       <div style="margin:10% auto; padding-bottom:20%;">
 
-        <div class="btn-wrapper col-10 mx-auto">
-          <h2>About</h2>
-          <br >
+        <div class="text-center">
           <h4>empasceneは、、</h4>
           <br >
-        </div>
+          <p>
+            音楽好きなあなたのための、楽曲紹介サイトです。<br >
+            <b>empascene</b>はただの楽曲紹介サイトではありません<br >
 
+            その曲を聴きたい気分や聴いていた時の気持ちを書いて世界にシェア<br >
+            うれしい・かなしい・たのしい・ドキドキ、、、<br >
+            あなたの気分に寄り添う曲と出会えるでしょう<br >
+
+            共感できたら ボタンで投稿を
+            コメント機能で他のユーザーと交流しながら新しい楽曲に出会えます。
+            素敵だなと思うユーザーをフォローすることができます。
+
+            ※歌詞やジャケット写真の転載は著作権御侵害にあたります。
+             ルールを守って楽しくつながりましょう。
+          </p>
+        </div>
+        <span class="back-right"  style="font-size:13px;">
+          <% if user_signed_in? %>
+            <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+          <% else %>
+            <%= link_to " もどる", root_path, class: "fas fa-reply text-right" %>
+          <% end %>
+       </span>
       </div>
 
     </div>

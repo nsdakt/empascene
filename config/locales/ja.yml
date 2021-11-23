@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: アカウント名
+        email: アドレス
+        introduction: 自己紹介
+        profile_image: プロフィール画像
+        password: パスワード
+  activerecord:
+    models:
+      post: 投稿
+    attributes:
+      post:
+        title: タイトル
+        song: 曲名
+        artist: アーティスト名
+        post_image: 画像
+        body: 本文
