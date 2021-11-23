@@ -1,86 +1,34 @@
 <!--検索結果一覧(投稿)-->
 <div class="container px-5 px-sm-0">
-  <div class="row" style="margin:3%;">
+  <div class="row">
 
     <!--サイドバー-->
-    <div class="col-md-4">
+    <div class="side col-md-4">
       <%= render 'users/sidebar', user: current_user %>
     </div>
 
   <!--検索結果（投稿）-->
-    <div class="col-md-7 offset-md-1">
-      <% if posts.exists? %>
-        <table class="table table-hover">
+    <div class="main col-md-8">
+      <%= flash[:notice] %>
+      <%= flash[:success] %>
+      <table class="table table-hover table-borderless">
+        <thead>
+          <th class="th-index text-center" style="padding:3%;">
+            <span class="index_line" style="font-size:20px;">
+              検索結果
+            </span>
+            <span class="back-right"  style="font-size:13px;">
+           　  <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+            </span>
+          </th>
+        </thead>
+        <% if posts.exists? %>
           <% posts.each do |post| %>
-            <tbody>
-              <td style="padding:5% 10%;">
-                <div class: "d-flex align-items-end" style="margin-bottom:22px;">
-                  <!--ユーザー詳細へリンク-->
-                  <%= link_to user_path(post.user.id) do %>
-                   <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"50x50" %>
-                   &emsp;
-                   <%= post.user.name %><br >
-                  <% end %>
-                </div>
-                <!--投稿内容-->
-                <div style="margin-bottom:20px;">
-                  <b>
-                   <%= link_to post.title, post_path(post.id) %>
-                  </b>
-                  <br >
-                </div>
-                <div style="margin-bottom:5px;">
-                  <i class="fas fa-music"></i>
-                  &nbsp;
-                  <%= post.song %><br>
-                </div>
-                <div style="margin-bottom:25px;">
-                  <i class="fas fa-microphone-alt"></i>
-                  &nbsp;
-                  <%= post.artist %><br>
-                </div>
-                <div style="margin-bottom:10px;">
-                  <i class="fas fa-heartbeat"></i>
-                  &nbsp;
-                  <%= link_to post.body.truncate(24), post_path(post.id) %><br>
-                </div>
-                <div style="margin-bottom:10px;">
-                  <% if post.post_image_id.present? %>
-                    <%= link_to attachment_image_tag(post, :post_image, :fill, 320, 180), post_path(post.id) %><br >
-                  <% end %>
-                </div>
-                <!--お気に入りボタン-->
-                <div id="favorites-btn-<%= post.id %>" style="display:inline;">
-                  <%= render 'favorites/favorite-btn', post: post %>
-                </div>
-                &ensp;
-                <!--コメント数-->
-                <div class="comment_counts" style="display:inline;">
-                  <%= render 'post_comments/counts', post: post %>
-                </div>
-                &emsp;
-                <!--投稿編集ボタン-->
-                <% if post.user == current_user %>
-                <div style="display:inline;" %>
-                  <%= link_to edit_post_path(post) do %>
-                   <%= render 'posts/edit_btn' %>
-                  <% end %>
-                </div>
-                &ensp;
-                <!--投稿削除ボタン-->
-                <div style="display:inline;">
-                  <%= link_to post_path(post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" do %>
-                     <%= render 'posts/delete_btn' %>
-                  <% end %>
-                </div>
-                <% end %>
-              </td>
-            </tbody>
+            <!--投稿一覧テンプレート-->
+            <%= render 'posts/table_data', post: post %>
           <% end %>
-        </table>
-      <% else %>
-         <p>一致する検索結果はありません</p>
-      <% end %>
+        <% end %>
+      </table>
       <div class="text-right">
      　　<%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
     　</div>

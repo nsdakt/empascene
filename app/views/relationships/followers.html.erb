@@ -1,65 +1,67 @@
 <div class="container px-5 px-sm-0">
-  <div class="row" style="margin:3% 5%;">
+  <div class="row">
 
     <!--サイドバー-->
-    <div class="col-md-4">
+    <div class="side col-md-4">
      <%= render 'users/sidebar', user: @user %>
     </div>
 
     <!--フォロワー一覧-->
-    <div class="col-md-7 offset-md-1">
-      <% if @users.exists? %>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th colspan="2" class="text-center">
-                <h4>フォロワー</h4>
-              </th>
-              <th style="font-size:13px;">
-                <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @users.each do |user| %>
-              <tr>
+    <div class="main col-md-8">
+      <%= flash[:notice] %>
+      <%= flash[:success] %>
+      <table class="table table-hover table-borderless">
+        <thead>
+          <tr class="text-center">
+            <th></th>
+            <th>
+              <span class="index_line" style="font-size:20px;">フォロワー</span>
+            </th>
+            <th class="back-right" style="font-size:13px;">
+              <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
+            </th>
+          </tr>
+        </thead>
+        <% if @users.exists? %>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr class="text-center">
+              <td class="display:inline;">
+                <%= link_to attachment_image_tag(user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size: "60x60"), user_path(user.id) %>
+                &ensp;
+                <%= link_to user.name, user_path(user.id) %>
+                &emsp;
+                <% if user.introduction.present?%>
+                  <%= link_to user.introduction.truncate(24), user_path(user.id) %>
+                <% else %>
+                  <%= user.introduction %>
+                  <td></td>
+                  <td></td>
+                <% end %>
+              </td>
+              <!--フォローボタン-->
+              <% unless current_user == user %>
                 <td class="display:inline;">
-                  <%= link_to user_path(user.id) do %>
-                    <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
-                    &ensp;
-                    <%= user.name %>
-                    &emsp;
-                    <% if user.introduction.present?%>
-                     <%= user.introduction.truncate(24) %>
-                    <% else %>
-                     <%= user.introduction %>
-                    <% end %>
+                  <% if user.followed_by?(current_user) %>
+                    <%= link_to "フォロー中", user_relationships_path(user.id), method: :DELETE, class: "btn btn-sm btn-info" %>
+                  <% else %>
+                    <%= link_to "フォローする", user_relationships_path(user.id), method: :POST, class: "btn btn-sm btn-outline-info" %>
                   <% end %>
                 </td>
-                <td></td>
-                <!--フォローボタン-->
-                <% unless current_user == user %>
-                  <td class="display:inline;">
-                    <% if user.followed_by?(current_user) %>
-                      <br >
-                      <%= link_to "フォロー中", user_relationships_path(user.id), method: :DELETE, class: "btn btn-sm btn-info" %>
-                    <% else %>
-                      <br >
-                      <%= link_to "フォローする", user_relationships_path(user.id), method: :POST, class: "btn btn-sm btn-outline-info" %>
-                    <% end %>
-                  </td>
-                <% else %>
-                <td></td>
-                <% end %>
-              </tr>
+              <% else %>
+              <td class="display:inline;">
+               <td></td>
+              </td>
             <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+        <% else %>
+          <tbody>
+           <td class="text-center" style="padding:10% 0;">フォローされているユーザーはいません</td>
           </tbody>
-        </table>
-      <% else %>
-       <tbody>
-        <td class="text-center" style="padding:10% 0;">フォローされているユーザーはいません</td>
-      </tbody>
-      <% end %>
+        <% end %>
+      </table>
     </div>
   </div>
 </div>

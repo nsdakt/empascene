@@ -1,18 +1,25 @@
 <!--検索結果一覧(ユーザー)-->
 <div class="container px-5 px-sm-0">
-  <div class="row" style="margin:3%; padding-bottom:10%;">
+  <div class="row">
 
     <!--サイドバー-->
-    <div class="col-md-4">
+    <div class="side col-md-4">
       <%= render 'users/sidebar', user: current_user %>
     </div>
 
     <!--検索結果(ユーザー）-->
-    <div class="col-md-7 offset-md-1">
-    <% if users.exists? %>
+    <div class="main col-md-8">
+      <%= flash[:notice] %>
+      <%= flash[:success] %>
       <table class="table table-hover table-borderless">
-        <tbody>
-        <% users.each do |user| %>
+        <thead>
+          <th class="th-index text-center" style="padding:3%;">
+            <span class="index_line" style="font-size:20px;">検索結果</span>
+          </th>
+        </thead>
+        <% if users.exists? %>
+        　<% users.each do |user| %>
+        　<tbody>
             <tr>
               <!--プロフィール画像-->
               <td style="padding:20px 15px;">
@@ -43,14 +50,17 @@
                 <% end %>
               </td>
             </tr>
+          </tbody>
           <% end %>
-        </tbody>
+        <% else %>
+          <tbody>
+            <td class="text-center" style="padding:10% 0;">一致する検索結果はありません</td>
+          </tbody>
+        <% end %>
       </table>
-    <% else %>
-     <p>一致する検索結果はありません</p>
-    <% end %>
-    <div class="text-right">
-     <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+      <div class="text-right">
+       <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+      </div>
     </div>
   </div>
 </div>
