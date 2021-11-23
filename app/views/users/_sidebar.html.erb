@@ -1,66 +1,70 @@
 <!--サイドバー-->
-<table class="table">
-  <tbody>
-    <tr>
-      <td class="text-center" style="padding:10px 5px;">
-        <!--画像、ユーザー名-->
-        <%= link_to user_path(user.id) do %>
-          <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
-          &emsp;
-          <%= user.name %>
-        <% end %>
-          &emsp;
-          &emsp;
-        <% if current_user == user %>
-          <!--編集ボタン-->
-          <%= link_to  edit_user_path(user), class: "btn btn-outline-secondary" do %>
-           <span class="fas fa-cog"></span>
+<div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td class="text-center" style="padding:10px 5px;">
+          <!--画像、ユーザー名-->
+          <%= link_to user_path(user.id) do %>
+            <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"60x60" %>
+            &emsp;
+            <%= user.name %>
           <% end %>
-        <% else %>
-          <!--フォローボタン-->
-          <% if user.followed_by?(current_user) %>
-            <%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: "btn btn-sm btn-info" %>
+            &emsp;
+            &emsp;
+          <% if current_user == user %>
+            <!--編集ボタン-->
+            <%= link_to  edit_user_path(user), class: "btn btn-outline-secondary" do %>
+             <span class="fas fa-cog"></span>
+            <% end %>
           <% else %>
-            <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-sm btn-outline-info" %>
+            <!--フォローボタン-->
+            <% if user.followed_by?(current_user) %>
+              <%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: "btn btn-sm btn-info" %>
+            <% else %>
+              <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-sm btn-outline-info" %>
+            <% end %>
           <% end %>
-        <% end %>
-      </td>
-    <tr>
-    <tr>
-      <td class="text-center" style="padding:25px 15px;">
-        <!--自己紹介文-->
-        <% if user.introduction.present?%>
-          <%=safe_join(user.introduction.split("\n"),tag(:br))%>
-        <% else %>
-         <%= user.introduction %>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td class="text-center" style="padding:20px 20px;">
-        <!--フォローフォロワー数-->
-        <%= link_to user_followings_path(user.id) do %>
-          <%= user.followings.count %>フォロー中
-        <% end %>
-        &emsp;
-        |
-        &emsp;
-        <%= link_to user_followers_path(user.id) do %>
-          <%=  user.followers.count %>フォロワー
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        </td>
+      <tr>
+      <tr>
+        <td class="text-center" style="padding:15px 15px;">
+          <!--自己紹介文-->
+           <%= user.introduction %>
+        </td>
+      </tr>
+      <tr>
+        <td class="text-center" style="padding:20px 20px;">
+          <!--フォローフォロワー数-->
+          <%= link_to user_followings_path(user.id) do %>
+            <%= user.followings.count %>フォロー中
+          <% end %>
+          &emsp;
+          |
+          &emsp;
+          <%= link_to user_followers_path(user.id) do %>
+            <%=  user.followers.count %>フォロワー
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<div style="padding:3%;">
-  <%= link_to 'お気に入り', favorites_user_path(@user), class: "btn btn-block btn-outline-warning" %>
+  <div class="text-center">
+    <span class="btn btn-md btn-outline-danger" style="padding-left:5%;">
+      <%= link_to favorites_user_path(@user) do %>
+        <i class="fas fa-hand-holding-heart"></i> お気に入り
+      <% end %>
+    </span>
+    &emsp;
+    <span class="btn btn-md btn-outline-warning" style="padding-right:5%;">
+      <%= link_to new_post_path(@user) do %>
+       <i class="fas fa-sliders-h"></i> 投稿する
+      <% end %>
+    </span>
+  </div>
+  <div class="text-center" style="padding:10% 3%;">
+      <%= render 'searches/search_form' %>
+      <br >
+  </div>
 </div>
-
-<div style="padding:3%;">
- <%= link_to '投稿する ', new_post_path, class: "btn btn-block btn-outline-warning" %>
-</div>
-  <br >
-  <%= render 'searches/search_form' %>
-  <br >
-  <br >
