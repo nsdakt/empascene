@@ -37,13 +37,13 @@
         <td class="text-center" style="padding:20px 20px;">
           <!--フォローフォロワー数-->
           <%= link_to user_followings_path(user.id) do %>
-            <%= user.followings.count %>フォロー中
+            <%= user.followings.where.not(is_deleted: true).count %>フォロー中
           <% end %>
           &emsp;
           |
           &emsp;
           <%= link_to user_followers_path(user.id) do %>
-            <%=  user.followers.count %>フォロワー
+            <%=  user.followers.where.not(is_deleted: true).count %>フォロワー
           <% end %>
         </td>
       </tr>
@@ -52,13 +52,13 @@
 
   <div class="text-center">
     <span class="btn btn-md btn-outline-danger" style="padding-left:5%;">
-      <%= link_to favorites_user_path(@user) do %>
+      <%= link_to favorites_user_path(user) do %>
         <i class="fas fa-hand-holding-heart"></i> お気に入り
       <% end %>
     </span>
     &emsp;
     <span class="btn btn-md btn-outline-warning" style="padding-right:5%;">
-      <%= link_to new_post_path(@user) do %>
+      <%= link_to new_post_path(user) do %>
        <i class="fas fa-sliders-h"></i> 投稿する
       <% end %>
     </span>

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       # 論理削除用のルーティング
       patch 'withdrawal'
     end
-
+    
     # フォロー機能
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
