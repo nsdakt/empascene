@@ -4,10 +4,10 @@
 
       <div style="margin:10% auto; padding-left:20%; padding-bottom:20%;">
       <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
-        <!--deviceエラー文-->
-        <%= render "devise/shared/error_messages", resource: resource %>
         <h4>アカウントを作成</h4>
         <br >
+        <!--deviceエラー文-->
+        <%= render "devise/shared/error_messages", resource: resource %>
         <div class="field">
           <div>
             <%= f.label :name %>

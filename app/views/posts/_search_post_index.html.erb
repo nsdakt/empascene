@@ -48,16 +48,24 @@
           </tr>
         </tbody>
       </table>
-      <div style="padding:3%;">
-       <%= link_to '投稿する ', new_post_path, class: "btn btn-block btn-outline-warning" %>
+
+      <div class="text-center">
+        <span class="btn btn-md btn-outline-danger" style="padding-left:5%;">
+          <%= link_to favorites_user_path(current_user) do %>
+            <i class="fas fa-hand-holding-heart"></i> お気に入り
+          <% end %>
+        </span>
+        &emsp;
+        <span class="btn btn-md btn-outline-warning" style="padding-right:5%;">
+          <%= link_to new_post_path do %>
+           <i class="fas fa-sliders-h"></i> 投稿する
+          <% end %>
+        </span>
       </div>
-      <div style="padding:3%;">
-        <%= link_to 'お気に入り', favorites_user_path(current_user), class: "btn btn-block btn-outline-warning" %>
+      <div class="text-center" style="padding:10% 3%;">
+       <%= render 'searches/search_form' %>
+       <br >
       </div>
-      <br >
-      <%= render 'searches/search_form' %>
-      <br >
-      <br >
     </div>
 
   <!--検索結果（投稿）-->
@@ -98,7 +106,9 @@
                   <%= link_to post.body.truncate(24), post_path(post.id) %><br>
                 </div>
                 <div style="margin-bottom:10px;">
-                  <%= link_to attachment_image_tag(post, :post_image, :fill, 320, 180), post_path(post.id) %><br >
+                  <% if post.post_image_id.present? %>
+                    <%= link_to attachment_image_tag(post, :post_image, :fill, 320, 180), post_path(post.id) %><br >
+                  <% end %>
                 </div>
                 <!--お気に入りボタン-->
                 <div id="favorites-btn-<%= post.id %>" style="display:inline;">

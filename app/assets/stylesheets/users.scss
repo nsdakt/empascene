@@ -1,3 +1,27 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// 新着一覧下線
+.index_line{
+  border-bottom:dotted;
+  border-color:#83ccd2;
+  border-width:3px;
+}
+// マイページ下線
+.myindex_line{
+  border-bottom:dotted;
+  border-color:#f39800;
+  border-width:3px;
+}
+
+// お気に入り下線
+.favo_line{
+  border-bottom:dotted;
+  border-color:#e597b2;
+  border-width:3px;
+}
+
+.write{
+  color:#83ccd2;
+}

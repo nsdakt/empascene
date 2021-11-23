@@ -18,7 +18,6 @@ class UsersController < ApplicationController
        flash[:success] = "変更を保存しました！"
        redirect_to user_path(current_user.id)
      else
-       flash[:warning] = "※使用できないアカウント名です"
        render :edit
      end
   end
@@ -35,14 +34,14 @@ class UsersController < ApplicationController
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @user.update(is_deleted: true)
     reset_session
-    flash[:notice] = "退会処理が完了しました"
+    flash[:delete] = "退会処理が完了しました"
     redirect_to root_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :introduction, :profile_image)
+    params.require(:user).permit(:name, :introduction, :profile_image, :is_deleted)
   end
 
   def set_user

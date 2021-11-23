@@ -18,45 +18,109 @@
  @import 'font-awesome';
 
 a {
- color:#383c3c;
+  color:#383c3c;
+}
+
+// エラー文
+#error_explanation{
+  color:#d7003a;
 }
 
 // Homeボタン
 .fa-home{
- color:#cd5e3c;
+  color:#cd5e3c;
 }
 
 // Aboutボタン
 .fa-heartbeat{
- color:#e597b2;
+  color:#e597b2;
 }
 
-// 新規登録ボタン
+// サインアップボタン
 .fa-sign-in-alt{
- color:#00a381;
+  color:#f39800;
 }
+
+// ログインボタン
+.fa-door-closed{
+  color:#00a381;
+}
+
 
 // 投稿一覧ボタン
 .fa-icons{
- color:#83ccd2;
+  color:#83ccd2;
 }
 
 // マイページボタン
 .fa-compact-disc{
- color:#0f2350;
+  color:#0f2350;
 }
 
 // 新規投稿ボタン
 .fa-sliders-h{
- color:#f39800;
+  color:#f39800;
 }
 
 // ログインへのリンク文字
 .login_link{
- color:#008899;
+  color:#008899;
 }
 
 // 新規登録へのリンク文字
 .signup_link{
- color:#f39800;
+  color:#f39800;
+}
+
+// .wrap {
+//   position: relative;
+//   max-width: 1000px;
+//   margin: 0 auto;
+// }
+
+// .main-wrap {
+//   float: left;
+//   max-width: 700px;
+//   width: 70%;
+// }
+
+// .main {
+//   margin: 0 0 0 10px;
+//   height: 8000px;
+// }
+
+.row{
+    display: flex;
+}
+
+// // サイドバー固定
+.side{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20%;
+  width: 40%;
+  height: 400px;
+  padding: 10px;
+  margin: 0;
+  line-height: 3;
+}
+
+// // 投稿一覧エリア
+.main{
+  width: 60%;
+  margin: 0;
+  padding: 10px;
+  line-height: 3;
+}
+
+// テーブルヘッダー固定
+.th-index {
+	background: white;
+	position: sticky;
+	top: 11%;
+}
+
+// テーブルヘッダーもどる
+.back-right{
+	float: right;
 }
