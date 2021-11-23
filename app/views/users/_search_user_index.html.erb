@@ -13,8 +13,13 @@
       <%= flash[:success] %>
       <table class="table table-hover table-borderless">
         <thead>
-          <th class="th-index text-center" style="padding:3%;">
-            <span class="index_line" style="font-size:20px;">検索結果</span>
+          <th colspan="4" class="th-index text-center" style="padding:3%;">
+            <span class="index_line" style="font-size:20px;">
+              検索結果
+            </span>
+            <span class="back-right"  style="font-size:13px;">
+           　  <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+            </span>
           </th>
         </thead>
         <% if users.exists? %>
@@ -34,7 +39,7 @@
               <!--自己紹介文-->
               <td  style="padding:20px 15px;">
                 <% if user.introduction.present?%>
-                   <%=safe_join(user.introduction.split("\n"),tag(:br))%>
+                   <%= link_to user.introduction, user_path(user.id) %>
                 <% else %>
                  <%= user.introduction %>
                 <% end %>
@@ -58,9 +63,6 @@
           </tbody>
         <% end %>
       </table>
-      <div class="text-right">
-       <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
-      </div>
     </div>
   </div>
 </div>

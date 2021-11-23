@@ -3,11 +3,13 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @posts = Post.page(params[:page]).per(10).reverse_order
+    posts = Post.joins(:user).where.not("users.is_deleted = ?", true)
+    @posts = posts.page(params[:page]).per(10).reverse_order
     @user = current_user
   end
 
   def show
+    # posts = Post.joins(:user).where.not("users.is_deleted = ?", true)
     @post = Post.find(params[:id])
     @user = @post.user
     @post_comment = PostComment.new
