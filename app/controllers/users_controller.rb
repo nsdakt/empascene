@@ -13,13 +13,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
-     if update(@user.user_params)
-       flash[:success] = "変更を保存しました！"
-       redirect_to user_path(current_user.id)
-     else
-       render :edit
-     end
+    @user = current_user
+   if @user.update(user_params)
+     flash[:success] = "変更を保存しました！"
+     redirect_to user_path(current_user.id)
+   else
+     render :edit
+   end
   end
 
   def favorites

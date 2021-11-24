@@ -63,7 +63,7 @@
     &ensp;
     <!--投稿削除ボタン-->
     <div style="display:inline;">
-      <%= link_to post_path(post), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？" do %>
+      <%= link_to post_path(post), method: :delete, local: true, "data-confirm" => "本当に削除しますか？" do %>
          <%= render 'posts/delete_btn' %>
       <% end %>
     </div>

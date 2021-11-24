@@ -24,18 +24,19 @@ class SearchesController < ApplicationController
         users.where('name LIKE ?', '%'+content+'%')
       end
     elsif model == 'post'
+      posts = Post.joins(:user).where.not("users.is_deleted = ?", true)
       if method == 'perfect'
-        Post.where(title: content)
-        Post.where(body: content)
+        posts.where(title: content)
+        posts.where(body: content)
       elsif method == 'foward'
-        Post.where('title LIKE ?', '%'+content+'%')
-        Post.where('body LIKE ?', '%'+content+'%')
+        posts.where('title LIKE ?', '%'+content+'%')
+        posts.where('body LIKE ?', '%'+content+'%')
       elsif method == 'backward'
-        Post.where('title LIKE ?', '%'+content+'%')
-        Post.where('body LIKE ?', '%'+content+'%')
+        posts.where('title LIKE ?', '%'+content+'%')
+        posts.where('body LIKE ?', '%'+content+'%')
       else
-        Post.where('title LIKE ?', '%'+content+'%')
-        Post.where('body LIKE ?', '%'+content+'%')
+        posts.where('title LIKE ?', '%'+content+'%')
+        posts.where('body LIKE ?', '%'+content+'%')
       end
     end
   end
