@@ -4,15 +4,15 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.joins(:user).where.not("users.is_deleted = ?", true)
-    @posts = posts.page(params[:page]).per(10).reverse_order
+    @posts = posts.page(params[:page]).per(5).reverse_order
     @user = current_user
   end
 
   def show
-    # posts = Post.joins(:user).where.not("users.is_deleted = ?", true)
     @post = Post.find(params[:id])
     @user = @post.user
     @post_comment = PostComment.new
+    @post_comments = @post.post_comments.joins(:user).where.not("users.is_deleted = ?", true)
   end
 
   def new

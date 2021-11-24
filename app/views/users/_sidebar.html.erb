@@ -50,6 +50,7 @@
     </tbody>
   </table>
 
+  <!--お気に入りボタン-->
   <div class="text-center">
     <span class="btn btn-md btn-outline-danger" style="padding-left:5%;">
       <%= link_to favorites_user_path(user) do %>
@@ -57,12 +58,14 @@
       <% end %>
     </span>
     &emsp;
+    <!--投稿ボタン-->
     <span class="btn btn-md btn-outline-warning" style="padding-right:5%;">
       <%= link_to new_post_path(user) do %>
        <i class="fas fa-sliders-h"></i> 投稿する
       <% end %>
     </span>
   </div>
+  <!--検索フォーム-->
   <div class="text-center" style="padding:10% 3%;">
       <%= render 'searches/search_form' %>
       <br >

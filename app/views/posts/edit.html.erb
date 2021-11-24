@@ -17,25 +17,35 @@
 
        <!--編集フォーム-->
       <%= form_with model:@post, url: post_path, local:true do |f| %>
+      <!--タイトル-->
        <div class="form-group">
         <%= f.text_field :title, class: "form-control post_title", placeholder:"どんな気分？：例）友達との待ち合わせに向かう楽しい気分に♪" %>
         <br >
        </div>
 
+       <!--曲名-->
        <div class="form-group">
         <%= f.text_field :song, class: "form-control post_song", placeholder:"なんて曲？" %>
         <br >
        </div>
 
+       <!--アーティスト名-->
        <div class="form-group">
         <%= f.text_field :artist, class: "form-control post_artist", placeholder:"だれの曲" %>
         <br>
        </div>
 
+       <!--本文-->
        <div class="form-group">
         <%= f.text_area :body, class: "form-control post_body",
         placeholder:"この曲のエピソード教えて！：例）久しぶりに会う友達との待ち合わせに向かう電車で聴いていました！" %>
        </div>
+
+       <!--画像-->
+       <div class="form-group">
+          <%= f.attachment_field :post_image %>
+          <br >
+        </div>
        <br >
        <div class="form-group">
         <%= f.submit '変更を保存', class: "btn btn-outline-success" %>

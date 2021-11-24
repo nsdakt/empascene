@@ -1,2 +1,2 @@
 <!--非同期通信のためのテンプレート化（コメントアイコン＆カウント）-->
-<i class="far fa-comments comment_btn"><%= post.post_comments.count %></i>
+<i class="far fa-comments comment_btn"><%= post.post_comments.joins(:user).where.not("users.is_deleted = ?", true).count %></i>

@@ -12,50 +12,45 @@
       <%= flash[:success] %>
       <table class="table table-hover table-borderless">
         <thead>
-          <tr class="text-center">
-            <th></th>
-            <th>
-              <span class="index_line" style="font-size:20px;">フォロー中</span>
-            </th>
-            <th class="back-right" style="font-size:13px;">
-              <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
-            </th>
-          </tr>
+          <th colspan="4" class="th-index text-center" style="padding:3%;">
+            <span class="index_line" style="font-size:20px;">
+              フォロー中
+            </span>
+            <span class="back-right"  style="font-size:13px;">
+           　  <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+            </span>
+          </th>
         </thead>
         <% if @users.exists? %>
-        <tbody>
           <% @users.each do |user| %>
-            <tr class="text-center">
+          <tbody>
+            <tr>
+              <!--プロフィール画像-->
               <td class="display:inline;">
                 <%= link_to attachment_image_tag(user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size: "60x60"), user_path(user.id) %>
                 &ensp;
+                <!--ユーザー名-->
                 <%= link_to user.name, user_path(user.id) %>
                 &emsp;
+                <!--自己紹介文-->
                 <% if user.introduction.present?%>
                    <%= link_to user.introduction.truncate(24), user_path(user.id) %>
                 <% else %>
                   <%= user.introduction %>
-                  <td></td>
-                  <td></td>
                 <% end %>
               </td>
               <!--フォローボタン-->
-              <% unless current_user == user %>
-                <td class="display:inline;">
+              <td style="padding:20px 15px;">
+                <% unless current_user == user %>
                   <% if user.followed_by?(current_user) %>
-                    <%= link_to "フォロー中", user_relationships_path(user.id), method: :delete, class: "btn btn-sm btn-info" %>
+                   <%= link_to 'フォロー中', user_relationships_path(user.id), method: :delete, class: "btn btn-sm btn-info" %>
                   <% else %>
-                    <%= link_to "フォローする", user_relationships_path(user.id), method: :post, class: "btn btn-sm btn-outline-info" %>
+                   <%= link_to 'フォローする', user_relationships_path(user.id), method: :post, class: "btn btn-sm btn-outline-info" %>
                   <% end %>
-                </td>
-              <% else %>
-                <td class="display:inline;">
-                 <td></td>
-                </td>
-              <% end %>
+                <% end %>
+              </td>
             </tr>
-          <% end %>
-        </tbody>
+          </tbody>
         <% else %>
         <tbody>
           <td></td>

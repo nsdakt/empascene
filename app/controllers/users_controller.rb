@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @posts = @user.posts.page(params[:page]).per(10).reverse_order
+    @posts = @user.posts.page(params[:page]).per(5).reverse_order
   end
 
   def edit
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def favorites
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
-    @favorite_posts = Post.find(favorites)
+    @favorite_posts = Post.joins(:user).where.not("users.is_deleted = ?", true).page(params[:page]).per(5).reverse_order
   end
 
   # 論理削除
