@@ -1,10 +1,10 @@
 <div class="container px-5 px-sm-0">
-  <div class="row" style="padding:3%;">
+  <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-7">
       <%= flash[:notice] %>
       <%= flash[:success] %>
-      <table class="table table-borderless">
+      <table class="show_main table table-borderless">
         <tr class="display:inline">
           <td style="padding:5px 50px;">
             <!--ユーザー名・画像-->
@@ -65,7 +65,6 @@
         </tr>
         <tr>
           <td style="padding:10px 50px;">
-
             <!--お気に入りボタン-->
             <div id="favorites-btn-<%= @post.id %>" style="display:inline; margin:0 3%;">
               <%= render 'favorites/favorite-btn', post: @post %>
@@ -90,7 +89,7 @@
               <% end %>
             </div>
             <!--投稿日-->
-            <div class="text-right" style="display:inline; margin-left:35%;">
+            <div class="text-right" style="display:inline; margin-left:25%;">
               <%= @post.created_at.strftime('%Y/%m/%d') %>
             </div>
             <% end %>
@@ -99,7 +98,7 @@
       </table>
     </div>
 
-    <div class="col-md-5 offset-md-1">
+    <div class="col-md-5">
       <!--コメントフォーム-->
       <div class="inputComment">
         <%= render 'post_comments/comment_form', post: @post, post_comment: @post_comment %>
@@ -110,8 +109,17 @@
        <%= render 'post_comments/index', post: @post ,post_comment: @post_comment %>
       </div>
     </div>
-    <div style="text-right">
-      <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply" %>
+    <div style="margin-left:15%;">
+      <br >
+      <b>
+        <%= link_to posts_path do %>
+         <i class="fas fa-icons"></i> home
+        <% end %>
+         &ensp;|&ensp;
+       <%= link_to user_path(current_user.id) do %>
+         <i class="fas fa-compact-disc"></i> myrecord
+        <% end %>
+      </b>
     </div>
   </div>
 </div>

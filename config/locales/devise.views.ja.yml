@@ -64,6 +64,7 @@ ja:
         invalid: "パスワードを確認してください"
         not_found_in_database: "パスワードを入力してください"
         inactive: "退会済みのアカウントです"
+        unauthenticated: "ログインしてください"
     shared:
       links:
         back: "戻る"
