@@ -1,9 +1,8 @@
 class PostsController < ApplicationController
-
   before_action :authenticate_user!
 
   def index
-    posts = Post.joins(:user).where.not("users.is_deleted = ?", true)
+    posts = Post.joins(:user).where.not('users.is_deleted = ?', true)
     @posts = posts.page(params[:page]).per(5).reverse_order
   end
 
@@ -11,18 +10,18 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @user = @post.user
     @post_comment = PostComment.new
-    @post_comments = @post.post_comments.joins(:user).where.not("users.is_deleted = ?", true)
+    @post_comments = @post.post_comments.joins(:user).where.not('users.is_deleted = ?', true)
   end
 
   def new
-   @post = Post.new
+    @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      flash[:success] = "投稿しました！"
+      flash[:success] = '投稿しました！'
       redirect_to posts_path
     else
       render :new
@@ -32,7 +31,7 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
     if @post.user == current_user
-      render "edit"
+      render 'edit'
     else
       redirect_to post_path
     end
@@ -42,10 +41,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.user_id = current_user.id
     if @post.update(post_params)
-     flash[:notice] = "投稿を編集しました！"
-     redirect_to post_path(@post.id)
+      flash[:notice] = '投稿を編集しました！'
+      redirect_to post_path(@post.id)
     else
-     render :edit
+      render :edit
     end
   end
 
@@ -54,7 +53,6 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to posts_path
   end
-
 
   def search
     @user = current_user
@@ -65,5 +63,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :song, :artist, :body, :post_image)
   end
-
 end

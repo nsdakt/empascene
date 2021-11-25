@@ -27,6 +27,10 @@
             <!--投稿一覧テンプレート-->
             <%= render 'posts/table_data', post: post %>
           <% end %>
+        <% else %>
+          <tbody>
+            <td class="text-center" style="padding:10% 0;">一致する検索結果はありません</td>
+          </tbody>
         <% end %>
       </table>
       <div style="padding-left:20%;">

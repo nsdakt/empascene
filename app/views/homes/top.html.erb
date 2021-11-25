@@ -4,20 +4,19 @@
 
       <div style="margin:10% auto; padding-bottom:20%;">
         <div class="btn-wrapper col-10 mx-auto">
-        <div class="text-center" style="margin:10% 0;">
-          <%= flash[:delete] =%>
-          <%= flash[:notice] =%>
-        </div>
-          <div class="text-center" style="margin:25% 0;">
+          <div class="text-center" style="margin:20% 0 20% 0;">
             <h3>
               <span class="suki" style="font-size:36px;">スキ</span>が&ensp;見つかる、
             </h3>
             <br >
             <h3>
-              <b>"わかる"</b> で&ensp;<span class="top_line">つながる</span>。
+              "<b>わかる</b>" で&ensp;<span class="top_line">つながる</span>。
             </h3>
           </div>
-
+          <div class="text-center">
+            <%= flash[:notice] =%>
+            <%= flash[:delete] =%>
+          </div>
           <br >
           <div class="row">
             <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-info btn-sm btn-block sign_in" %>
