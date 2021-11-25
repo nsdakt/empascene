@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   get 'home/about' => 'homes#about'
   get '/search', to: 'searches#search'
 
-  resources :posts, only: [:index, :show, :new, :edit, :create, :update, :destroy] do
-   resource :favorites, only: [:create, :destroy]
-   resources :post_comments, only: [:create, :destroy]
+  resources :posts, only: %i[index show new edit create update destroy] do
+    resource :favorites, only: %i[create destroy]
+    resources :post_comments, only: %i[create destroy]
   end
 
-  resources :users, only: [:show, :edit, :update] do
+  resources :users, only: %i[show edit update] do
     # お気に入り一覧
     member do
       # お気に入り一覧
@@ -22,9 +22,8 @@ Rails.application.routes.draw do
     end
 
     # フォロー機能
-    resource :relationships, only: [:create, :destroy]
+    resource :relationships, only: %i[create destroy]
     get 'followings' => 'relationships#followings', as: 'followings'
     get 'followers' => 'relationships#followers', as: 'followers'
   end
-
 end

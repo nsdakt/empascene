@@ -1,5 +1,4 @@
 class FavoritesController < ApplicationController
-
   before_action :authenticate_user!
   before_action :post_params
 
@@ -18,9 +17,9 @@ class FavoritesController < ApplicationController
   end
 
   private
+
   # post/show画面で定義した@postを反映させる
   def post_params
     @post = Post.find(params[:post_id])
   end
-
 end

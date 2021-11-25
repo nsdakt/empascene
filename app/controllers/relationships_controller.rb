@@ -1,5 +1,4 @@
 class RelationshipsController < ApplicationController
-
   before_action :authenticate_user!
 
   def create
@@ -15,15 +14,14 @@ class RelationshipsController < ApplicationController
   end
 
   def followings
-    #users = User.where.not(is_deleted: true)
+    # users = User.where.not(is_deleted: true)
     @user = User.find(params[:user_id])
     @users = @user.followings.where.not(is_deleted: true).page(params[:page]).per(10).reverse_order
   end
 
   def followers
-    #users = User.where.not(is_deleted: true)
+    # users = User.where.not(is_deleted: true)
     @user = User.find(params[:user_id])
     @users = @user.followers.where.not(is_deleted: true).page(params[:page]).per(10).reverse_order
   end
-
 end

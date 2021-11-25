@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-
- before_action :authenticate_user!
- before_action :set_user, only: [:favorites]
+  before_action :authenticate_user!
+  before_action :set_user, only: [:favorites]
 
   def show
     @user = User.find(params[:id])
@@ -14,20 +13,20 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-   if @user.update(user_params)
-     flash[:success] = "変更を保存しました！"
-     redirect_to user_path(current_user.id)
-   else
-     render :edit
-   end
+    if @user.update(user_params)
+      flash[:success] = '変更を保存しました！'
+      redirect_to user_path(current_user.id)
+    else
+      render :edit
+    end
   end
 
   def favorites
     @user = User.find(params[:id])
     favorite_post_ids = Favorite.where(user_id: @user.id).pluck(:post_id)
-    @favorite_posts = Post.joins(:user).where(id: favorite_post_ids).where.not("users.is_deleted = ?", true).page(params[:page]).per(5).reverse_order
+    @favorite_posts = Post.joins(:user).where(id: favorite_post_ids).where.not('users.is_deleted = ?',
+                                                                               true).page(params[:page]).per(5).reverse_order
     # 全体の投稿の中から削除されたユーザーの投稿を省きfavorite_post_idsで取得したidを持つの投稿を返す
-    
   end
 
   # 論理削除
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
     # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @user.update(is_deleted: true)
     reset_session
-    flash[:delete] = "退会処理が完了しました"
+    flash[:delete] = '退会処理が完了しました'
     redirect_to root_path
   end
 
@@ -49,5 +48,4 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
-
 end

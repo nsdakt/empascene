@@ -10,9 +10,9 @@ class User < ApplicationRecord
   attachment :profile_image
 
   # 自分がフォローしている側の関係性（与フォロー）
-  has_many :active_relationships, class_name: "Relationship", foreign_key: "following_id", dependent: :destroy
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'following_id', dependent: :destroy
   # 自分がフォローされている側の関係性（被フォロー）
-  has_many :passive_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
 
   # フォローしている人の取得
   has_many :followings, through: :active_relationships, source: :follower
