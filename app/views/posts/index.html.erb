@@ -4,7 +4,7 @@
 
     <!--サイドバー-->
       <div class="side col-md-4">
-       <%= render 'users/sidebar', user: @user %>
+       <%= render 'users/sidebar', user: current_user %>
       </div>
 
       <!--投稿一覧-->
@@ -22,16 +22,16 @@
             <!--投稿一覧テンプレート-->
             <%= render 'posts/table_data', post: post %>
           <% end %>
-          <!--<div>-->
-          <!--  <%= paginate @posts %>-->
-          <!--</div>-->
+
         <% else %>
           <tbody>
             <td class="text-center" style="padding:10% 0;">投稿はまだありません</td>
           </tbody>
         <% end %>
-        <%= paginate @posts %>
       </table>
+      <div style="padding-left:20%;">
+        <%= paginate @posts %>
+      </div>
     </div>
   </div>
 </div>

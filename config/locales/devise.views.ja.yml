@@ -2,10 +2,10 @@ ja:
   activerecord:
     attributes:
       user:
-        name: "名前"
+        name: "アカウント名"
         current_password: "現在のパスワード"
         email: "メールアドレス"
-        password: "パスワード"
+        password: "パスワード（6文字以上）"
         password_confirmation: "パスワード（確認用）"
         remember_me: "ログインを記憶"
     models:
@@ -58,7 +58,7 @@ ja:
         sign_in: "ログイン"
       user:
         signed_in: "おかえりなさい♪"
-        signed_out: "いってらっしゃい◎"
+        signed_out: "ログアウトしました"
     failure:
       user:
         invalid: "パスワードを確認してください"

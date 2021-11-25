@@ -28,13 +28,13 @@
         </td>
       <tr>
       <tr>
-        <td class="text-center" style="padding:15px 15px;">
+        <td class="text-center" style="padding:5px 10px;">
           <!--自己紹介文-->
            <%= user.introduction %>
         </td>
       </tr>
       <tr>
-        <td class="text-center" style="padding:20px 20px;">
+        <td class="text-center" style="padding:10px 20px 0px 20px;">
           <!--フォローフォロワー数-->
           <%= link_to user_followings_path(user.id) do %>
             <%= user.followings.where.not(is_deleted: true).count %>フォロー中

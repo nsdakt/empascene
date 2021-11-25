@@ -6,7 +6,7 @@ class SearchesController < ApplicationController
     @model = params["model"]
     @content = params["content"]
     @method = params["method"]
-    @records = search_for(@model, @content, @method)
+    @records = search_for(@model, @content, @method).page(params[:page]).per(10).reverse_order
   end
 
   private

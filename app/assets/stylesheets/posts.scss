@@ -21,3 +21,18 @@
 .fa-microphone-alt{
   color:#ec6d51;
 }
+
+@media screen and (min-width: 320px) {
+    .post_image{
+      width: 200px;
+      height: 160px;
+    }
+}
+
+@media screen and (min-width: 764px) {
+    .post_image{
+      width: 360px;
+      height: 240px;
+    }
+}
+

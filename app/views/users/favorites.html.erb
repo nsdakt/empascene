@@ -14,10 +14,11 @@
               <%= @user.name %>のお気に入り
             </span>
             <span class="back-right"  style="font-size:13px;">
-           　  <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
-          　</span>
+              <%= link_to " もどる", 'javascript:history.back()', class: "fas fa-reply text-right" %>
+           </span>
           </th>
-      　<% if @favorite_posts.present? %>
+          <!--お気に入りの投稿一覧-->
+        <% if @favorite_posts.present? %>
           <%= render partial: "posts/table_data", collection: @favorite_posts, as: "post" %>
         <% else %>
           <tbody>
@@ -25,6 +26,9 @@
           </tbody>
         <% end%>
       </table>
+      <div style="padding-left:20%;">
+        <%= paginate @favorite_posts %>
+      </div>
     </div>
   </div>
 </div>

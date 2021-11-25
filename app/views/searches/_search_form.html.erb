@@ -4,13 +4,12 @@
     <span class="search_form" style="margin:20px;">
       <%= text_field_tag 'content' %>
     </span>
+    <%= submit_tag '検索', class: "btn btn-sm btn-secondary" %>
     <br >
     <!--モデル選択-->
     <%= select_tag 'model', options_for_select({ "投稿" => "post", "ユーザー" => "user" }) %>
     &thinsp;
     <!--条件選択-->
     <%= select_tag 'method', options_for_select({ "部分一致" => "partial", "前方一致" => "forward", "後方一致" => "backward", "完全一致" => "perfect" }) %>
-    &emsp;
-    <%= submit_tag '検索' %>
   <% end %>
 <% end %>
