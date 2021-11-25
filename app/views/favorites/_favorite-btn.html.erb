@@ -1,7 +1,17 @@
-<% if post.favorited_by?(current_user) %>
-  <!--お気に入り後-->
-  <%= link_to post.favorites.count, post_favorites_path(post.id), method: :delete, remote: true, class: "fas fa-hand-holding-heart"%>
+<% unless current_user == post.user %>
+  <% if post.favorited_by?(current_user) %>
+    <!--お気に入り後-->
+    <%= link_to "", post_favorites_path(post.id), method: :delete, remote: true, class: "fas fa-hand-holding-heart"%>
+  <% else %>
+    <!--お気に入り前-->
+    <%= link_to "", post_favorites_path(post.id), method: :post, remote: true, class: "far fa-heart heart_black"%>
+  <% end %>
 <% else %>
-  <!--お気に入り前-->
-  <%= link_to post.favorites.count, post_favorites_path(post.id), method: :post, remote: true, class: "far fa-heart heart_black"%>
+  <% if post.favorited_by?(current_user) %>
+    <!--お気に入り後-->
+    <%= link_to post.favorites.joins(:user).where.not("users.is_deleted = ?", true).count, post_favorites_path(post.id), method: :delete, remote: true, class: "fas fa-hand-holding-heart"%>
+  <% else %>
+    <!--お気に入り前-->
+    <%= link_to post.favorites.joins(:user).where.not("users.is_deleted = ?", true).count, post_favorites_path(post.id), method: :post, remote: true, class: "far fa-heart heart_black"%>
+  <% end %>
 <% end %>

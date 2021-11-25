@@ -24,8 +24,10 @@ class UsersController < ApplicationController
 
   def favorites
     @user = User.find(params[:id])
-    favorites = Favorite.where(user_id: @user.id).pluck(:post_id)
-    @favorite_posts = Post.joins(:user).where.not("users.is_deleted = ?", true).page(params[:page]).per(5).reverse_order
+    favorite_post_ids = Favorite.where(user_id: @user.id).pluck(:post_id)
+    @favorite_posts = Post.joins(:user).where(id: favorite_post_ids).where.not("users.is_deleted = ?", true).page(params[:page]).per(5).reverse_order
+    # 全体の投稿の中から削除されたユーザーの投稿を省きfavorite_post_idsで取得したidを持つの投稿を返す
+    
   end
 
   # 論理削除

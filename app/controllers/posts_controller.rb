@@ -5,7 +5,6 @@ class PostsController < ApplicationController
   def index
     posts = Post.joins(:user).where.not("users.is_deleted = ?", true)
     @posts = posts.page(params[:page]).per(5).reverse_order
-    @user = current_user
   end
 
   def show

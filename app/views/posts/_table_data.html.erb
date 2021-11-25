@@ -1,7 +1,7 @@
 <!--投稿の一覧表示-->
 <tbody>
-  <td style="padding:5% 25%;">
-    <div class: "d-flex align-items-end" style="margin-bottom:22px;">
+  <td style="padding:5% 0">
+    <div class: "d-flex align-items-end" style="margin-bottom:22px; padding-left:30%;">
       <!--ユーザー詳細へリンク-->
       <%= link_to user_path(post.user.id) do %>
        <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size:"50x50" %>
@@ -10,39 +10,39 @@
       <% end %>
     </div>
     <!--投稿内容-->
-    <div style="margin-bottom:10px;">
+    <div style="margin-bottom:10px; padding-left:30%;">
       <!--タイトル-->
       <b>
        <%= link_to post.title, post_path(post.id) %>
       </b>
     <br >
     </div>
-    <div>
+    <div style="padding-left:30%;">
       <!--曲名-->
       <i class="fas fa-music"></i>
       &nbsp;
       <%= post.song %>
     </div>
-    <div style="margin-bottom:15px;">
+    <div style="margin-bottom:15px; padding-left:30%;">
       <!--アーティスト名-->
       <i class="fas fa-microphone-alt"></i>
       &nbsp;
       <%= post.artist %><br>
     </div>
-    <div style="margin-bottom:10px;">
+    <div style="margin-bottom:10px; padding-left:30%;">
       <!--本文-->
       <i class="fas fa-heartbeat"></i>
       &nbsp;
       <%= link_to post.body.truncate(24), post_path(post.id) %><br>
     </div>
-    <div style="margin-bottom:10px;">
+    <div class="text-center" style="margin-bottom:10px; padding-left:8%;">
       <!--投稿画像-->
       <% if post.post_image_id.present? %>
         <%= link_to attachment_image_tag(post, :post_image, :fill, 320, 180), post_path(post.id) %><br >
       <% end %>
     </div>
     <!--お気に入りボタン-->
-    <div id="favorites-btn-<%= post.id %>" style="display:inline;">
+    <div id="favorites-btn-<%= post.id %>" style="display:inline; padding-left:30%;">
       <%= render 'favorites/favorite-btn', post: post %>
     </div>
     &ensp;

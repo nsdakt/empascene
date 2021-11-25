@@ -27,17 +27,13 @@
         　<tbody>
             <tr>
               <!--プロフィール画像-->
-              <td style="padding:20px 15px;">
-                <%= link_to user_path(user.id) do %>
-                 <%= attachment_image_tag user, :profile_image, :fill, 20, 20, fallback: "default-image.jpg", size: "60x60" %>
-                <% end %>
-              </td>
+              <td class="display:inline;">
+                <%= link_to attachment_image_tag(user, :profile_image, :fill, 60, 60, fallback: "default-image.jpg", size: "60x60"), user_path(user.id) %>
+                &ensp;
               <!--ユーザー名-->
-              <td style="padding:20px 15px;">
                 <%= link_to user.name, user_path(user.id) %>
-              </td>
+                &emsp;
               <!--自己紹介文-->
-              <td  style="padding:20px 15px;">
                 <% if user.introduction.present?%>
                    <%= link_to user.introduction, user_path(user.id) %>
                 <% else %>
@@ -63,6 +59,9 @@
           </tbody>
         <% end %>
       </table>
+      <div style="padding-left:20%;">
+        <%= paginate users %>
+      </div>
     </div>
   </div>
 </div>
