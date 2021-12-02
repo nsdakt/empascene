@@ -40,8 +40,8 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.user_id = current_user.id
     @post.score = Language.get_data(post_params[:body])
+    @post.user_id = current_user.id
     if @post.update(post_params)
       flash[:notice] = '投稿を編集しました！'
       redirect_to post_path(@post.id)
