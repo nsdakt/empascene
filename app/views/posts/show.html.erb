@@ -55,13 +55,23 @@
         <tr>
           <!--本文-->
           <td style="padding:20px 60px;">
-            <%=safe_join(@post.body.split("\n"),tag(:br))%>
+            <%=safe_join(@post.body.split("\n"),tag(:br))%> <br >
           </td>
         </tr>
         <tr>
           <!--画像-->
           <td class="pist_image_show" style="padding:10px 30px;">
-            <%= attachment_image_tag @post, :post_image %>
+            <% if @post.post_image_id.present? %>
+        <%= attachment_image_tag(@post, :post_image, :fill, 320, 180) %>
+      <% end %>
+          </td>
+        </tr>
+        <tr class="text-right">
+          <!--感情分析スコア-->
+          <td>
+            <% if @post.user == current_user %>
+             <span class="sentiment-score" style="font-size:13px;">本文の感情分析スコア [<%= @post.score %>]</span>
+            <% end %>
           </td>
         </tr>
         <tr>
