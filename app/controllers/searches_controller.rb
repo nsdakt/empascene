@@ -15,12 +15,16 @@ class SearchesController < ApplicationController
       users = User.where.not(is_deleted: true)
       if method == 'perfect'
         users.where(name: content)
+        users.where(introduction: content)
       elsif method == 'foward'
         users.where('name LIKE ?', '%' + content + '%')
+        users.where('introduction LIKE ?', '%' + content + '%')
       elsif method == 'backward'
         users.where('name LIKE ?', '%' + content + '%')
+        users.where('introduction LIKE ?', '%' + content + '%')
       else
         users.where('name LIKE ?', '%' + content + '%')
+        users.where('introduction LIKE ?', '%' + content + '%')
       end
     elsif model == 'post'
       posts = Post.joins(:user).where.not('users.is_deleted = ?', true)

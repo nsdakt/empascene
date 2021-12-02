@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.score = Language.get_data(post_params[:body])
     if @post.save
       flash[:success] = '投稿しました！'
       redirect_to posts_path
@@ -40,6 +41,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.user_id = current_user.id
+    @post.score = Language.get_data(post_params[:body])
     if @post.update(post_params)
       flash[:notice] = '投稿を編集しました！'
       redirect_to post_path(@post.id)

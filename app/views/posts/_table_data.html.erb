@@ -34,6 +34,10 @@
       <i class="fas fa-heartbeat"></i>
       &nbsp;
       <%= link_to post.body.truncate(24), post_path(post.id) %><br>
+      <% if post.user == current_user %>
+       <!--感情分析スコア-->
+       <span class="sentiment-score" style="font-size:13px;">本文の感情分析スコア [<%= post.score %>]</span>
+      <% end %>
     </div>
     <div class="text-center" style="margin-bottom:10px; padding-left:8%;">
       <!--投稿画像-->
